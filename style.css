@@ -1,11 +1,10 @@
-/* --- CẤU HÌNH CHUNG (VATICAN STYLE) --- */
+/* --- HARVARD STYLE VARIABLES --- */
 :root {
-    --bg-paper: #FDFBF7; /* Màu giấy cũ */
-    --vatican-gold: #C5A059; /* Màu vàng kim loại trầm */
-    --cardinal-red: #800000; /* Màu đỏ đô */
-    --text-dark: #333333;
-    --text-light: #666666;
-    --border-color: #E0Ddd5;
+    --harvard-crimson: #A51C30; /* Màu đỏ đặc trưng */
+    --harvard-black: #1e1e1e;
+    --harvard-grey: #f3f3f3;
+    --text-dark: #292929;
+    --white: #ffffff;
 }
 
 * {
@@ -15,111 +14,105 @@
 }
 
 body {
-    background-color: var(--bg-paper);
+    background-color: var(--white);
     color: var(--text-dark);
-    font-family: 'Playfair Display', 'Times New Roman', serif; /* Font có chân */
-    line-height: 1.6;
+    font-family: 'Libre Franklin', sans-serif; /* Font nội dung */
+    line-height: 1.7;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Hiệu ứng giấy (nếu có mạng) */
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Merriweather', serif; /* Font tiêu đề */
+    color: var(--harvard-black);
+    font-weight: 700;
 }
 
 /* --- HEADER --- */
-.top-bar {
-    height: 5px;
-    background: linear-gradient(to right, var(--vatican-gold), #fff, var(--vatican-gold));
+.harvard-header {
+    background-color: var(--harvard-black);
+    color: var(--white);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-header {
-    background: #fff;
-    padding: 2rem 1rem 1rem;
-    border-bottom: 1px solid var(--border-color);
-    text-align: center;
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.coat-of-arms {
-    font-size: 2.5rem;
-    color: var(--vatican-gold);
-    margin-bottom: 0.5rem;
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.site-title h1 {
-    font-family: 'Cinzel', serif; /* Font tiêu đề La Mã */
-    font-size: 2.5rem;
+.shield-text {
+    background-color: var(--harvard-crimson);
+    padding: 5px 10px;
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 700;
-    color: var(--text-dark);
 }
 
-.latin-subtitle {
-    font-style: italic;
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
+.site-branding h1 {
+    font-size: 1.4rem;
+    color: var(--white);
+    line-height: 1.1;
+    margin: 0;
+}
+
+.site-branding p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* --- NAVIGATION --- */
-nav {
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px double var(--border-color);
-    padding: 0.8rem 0;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.nav-links {
+.main-nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    gap: 2rem;
 }
 
-.nav-links li {
-    margin: 0 0.5rem;
-}
-
-.nav-links a {
+.nav-list a {
+    color: var(--white);
     text-decoration: none;
-    color: var(--text-dark);
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 0.9rem;
+    font-weight: 600;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    transition: color 0.3s;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
 }
 
-.nav-links a:hover, .nav-links a.active {
-    color: var(--cardinal-red); /* Hover màu đỏ */
+.nav-list a:hover, .nav-list a.active {
+    color: var(--harvard-crimson); /* Active màu đỏ trên nền đen */
 }
 
-.separator {
-    color: var(--vatican-gold);
-    font-size: 0.8rem;
-}
-
-.menu-toggle {
-    display: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-dark);
-}
-
-/* --- MAIN CONTENT --- */
-.main-container {
-    flex: 1;
-    padding: 3rem 1rem;
-    max-width: 800px; /* Giới hạn chiều rộng để giống văn bản */
+/* --- MAIN CONTAINER --- */
+.container {
+    max-width: 1100px;
     margin: 0 auto;
+    padding: 4rem 2rem;
+    flex: 1;
     width: 100%;
 }
 
-/* Tab Animation */
+/* Tab Logic */
 .tab-content {
     display: none;
-    animation: fadeIn 0.8s ease;
+    animation: fadeIn 0.6s ease;
 }
 .tab-content.active {
     display: block;
@@ -129,224 +122,216 @@ nav {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- SECTION STYLING --- */
+/* --- SECTIONS --- */
 .section-header {
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    font-size: 1.8rem;
-    color: var(--cardinal-red);
-    margin-bottom: 2rem;
-    border-bottom: 1px solid var(--vatican-gold);
-    display: inline-block;
-    padding-bottom: 0.5rem;
-    width: 100%;
+    margin-bottom: 3rem;
 }
 
-.content-frame {
-    background: #fff;
-    padding: 2rem;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    position: relative;
-}
-
-/* Tạo hiệu ứng góc khung tranh */
-.content-frame::before {
-    content: '';
-    position: absolute;
-    top: 5px; left: 5px; right: 5px; bottom: 5px;
-    border: 1px solid var(--border-color);
-    pointer-events: none;
-}
-
-/* --- HOME / DOCUMENT STYLE --- */
-.papal-document {
-    text-align: center;
-    padding: 2rem;
-    border: 4px double var(--vatican-gold); /* Viền đôi màu vàng */
-    background: #fff;
-}
-
-.hero-image-frame {
-    display: inline-block;
-    padding: 5px;
-    border: 1px solid var(--vatican-gold);
-    margin-bottom: 1.5rem;
-}
-
-.profile-img {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-    filter: sepia(20%); /* Hiệu ứng ảnh cũ */
-}
-
-.doc-title {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    color: var(--text-dark);
+.section-header h2 {
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
 }
 
-.doc-subtitle {
-    font-style: italic;
-    font-family: 'Playfair Display', serif;
-    color: var(--text-light);
-    font-size: 1.2rem;
+.crimson-line {
+    width: 60px;
+    height: 4px;
+    background-color: var(--harvard-crimson);
 }
 
-.divider-icon {
-    margin: 2rem 0;
-    color: var(--cardinal-red);
-    font-size: 1.2rem;
-}
-
-.motto-box {
-    margin-top: 1rem;
-}
-.latin-text {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--text-dark);
-}
-.ref-text {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    margin-top: 0.5rem;
-}
-
-/* --- ABOUT & EXPERIENCE --- */
-.info-list {
-    list-style: none;
-    font-size: 1.1rem;
-}
-.info-list li {
-    margin-bottom: 0.8rem;
-    border-bottom: 1px dashed #eee;
-    padding-bottom: 0.5rem;
-}
-.small-divider {
-    border: 0;
-    border-top: 1px solid var(--vatican-gold);
-    margin: 2rem auto;
-    width: 50%;
-}
-.skills-text {
-    text-align: center;
-    font-style: italic;
-    color: var(--text-dark);
-    margin-top: 1rem;
-}
-
-.timeline-classic {
-    border-left: 2px solid var(--vatican-gold);
-    padding-left: 2rem;
-}
-.timeline-entry {
-    margin-bottom: 2rem;
-    position: relative;
-}
-.timeline-entry::before {
-    content: '✦'; /* Ký tự hình thoi */
-    position: absolute;
-    left: -2.6rem;
-    top: 0;
-    color: var(--cardinal-red);
-    background: #fff;
-    font-size: 1.2rem;
-}
-.role {
-    font-size: 1.2rem;
-    color: var(--cardinal-red);
-    font-family: 'Cinzel', serif;
-}
-.place {
-    font-style: italic;
-    color: var(--text-light);
-}
-.time {
-    font-size: 0.85rem;
-    font-weight: bold;
-    color: var(--vatican-gold);
-    display: block;
-    margin-bottom: 0.2rem;
-}
-
-/* --- AWARDS --- */
-.awards-list {
-    display: grid;
-    gap: 1.5rem;
-}
-.award-item {
+/* --- HOME HERO --- */
+.hero-block {
     display: flex;
-    align-items: flex-start;
-    padding-bottom: 1rem;
+    align-items: center;
+    gap: 3rem;
+    background-color: var(--harvard-grey);
+    padding: 3rem;
+    margin-bottom: 3rem;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.category-tag {
+    color: var(--harvard-crimson);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.hero-title {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero-citation {
+    margin-top: 1rem;
+    font-style: italic;
+    color: var(--harvard-crimson);
+    font-family: 'Merriweather', serif;
+}
+
+.hero-image img {
+    width: 300px;
+    height: 350px;
+    object-fit: cover;
+    box-shadow: 20px 20px 0 var(--harvard-crimson); /* Hiệu ứng bóng đỏ đặc trưng */
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 2rem 0;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-family: 'Merriweather', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--harvard-crimson);
+}
+
+.stat-label {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* --- EXPERIENCE CARDS --- */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.info-card {
+    background: var(--white);
+    border: 1px solid #e0e0e0;
+    padding: 2rem;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.info-card:hover {
+    border-color: var(--harvard-crimson);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.card-meta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--harvard-crimson);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.info-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- AWARDS LIST --- */
+.award-row {
+    display: flex;
+    padding: 2rem 0;
     border-bottom: 1px solid #eee;
 }
-.award-icon {
-    color: var(--vatican-gold);
-    font-size: 1.5rem;
-    margin-right: 1rem;
-    margin-top: 0.2rem;
+
+.award-year {
+    width: 100px;
+    font-weight: 700;
+    color: var(--text-dark);
 }
-.award-details h3 {
-    font-size: 1.1rem;
-    font-family: 'Cinzel', serif;
+
+.award-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
 }
 
 /* --- CONTACT --- */
-.center-text {
+.contact-wrapper {
+    background: var(--harvard-grey);
+    padding: 4rem;
     text-align: center;
 }
-.email-link {
-    font-size: 1.2rem;
-    color: var(--cardinal-red);
-    font-weight: bold;
-    margin: 1rem 0;
+
+.crimson-button {
+    display: inline-block;
+    background-color: var(--harvard-crimson);
+    color: var(--white);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-weight: 700;
+    margin: 2rem 0;
+    text-transform: uppercase;
+    transition: background 0.3s;
 }
-.donation-box {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    border: 1px solid var(--vatican-gold);
-    background-color: #fafafa;
+
+.crimson-button:hover {
+    background-color: #8a1525;
 }
 
 /* --- FOOTER --- */
-footer {
-    text-align: center;
-    padding: 2rem;
-    background: #fff;
-    border-top: 1px solid var(--border-color);
+.harvard-footer {
+    background-color: var(--harvard-black);
+    color: var(--white);
+    padding: 3rem 0;
     margin-top: auto;
-}
-.footer-line {
-    width: 50px;
-    height: 2px;
-    background: var(--vatican-gold);
-    margin: 0 auto 1rem;
-}
-.small-footer {
-    font-size: 0.8rem;
-    color: var(--text-light);
-    font-style: italic;
-    margin-top: 0.5rem;
+    text-align: center;
 }
 
-/* --- RESPONSIVE --- */
+.footer-motto {
+    font-family: 'Merriweather', serif;
+    color: var(--harvard-crimson);
+    font-weight: 900;
+    margin-top: 1rem;
+}
+
+/* --- MOBILE --- */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.mobile-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    margin: 5px 0;
+}
+
 @media (max-width: 768px) {
-    .menu-toggle { display: block; position: absolute; left: 1rem; top: 2rem; }
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        background: #fff;
-        border: 1px solid var(--vatican-gold);
-        padding: 1rem;
-        position: absolute;
-        top: 100%; left: 0; right: 0; z-index: 100;
+    .hero-block {
+        flex-direction: column-reverse;
+        padding: 2rem;
     }
-    .nav-links.active { display: flex; }
-    .separator { display: none; }
-    .nav-links li { margin: 0.5rem 0; }
-    nav { position: relative; }
+    .hero-image img {
+        width: 100%;
+        box-shadow: 10px 10px 0 var(--harvard-crimson);
+    }
+    .mobile-toggle { display: block; }
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--harvard-black);
+        padding: 1rem;
+    }
+    .main-nav.active { display: block; }
+    .nav-list { flex-direction: column; gap: 1rem; }
+    .two-columns { grid-template-columns: 1fr; }
 }
