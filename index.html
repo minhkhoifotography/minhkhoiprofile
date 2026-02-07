@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minh Khôi | Portfolio</title>
+    <title>Lưu Minh Khôi | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* --- CÀI ĐẶT CHUNG & MÀU SẮC (DARK THEME) --- */
+        /* --- CÀI ĐẶT CHUNG & MÀU SẮC (DARK THEME - Lấy cảm hứng từ file cũ của bạn) --- */
         :root {
             --bg-color: #0f172a;
             --text-color: #e2e8f0;
-            --accent-color: #38bdf8; /* Màu xanh dương sáng */
+            --accent-color: #D4AF37; /* Màu vàng kim sang trọng từ file cũ */
             --card-bg: #1e293b;
-            --nav-bg: rgba(15, 23, 42, 0.9);
+            --nav-bg: rgba(15, 23, 42, 0.95);
+            --timeline-line: #334155;
         }
 
         * {
@@ -43,18 +45,25 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
         .nav-links a:hover {
@@ -70,6 +79,7 @@
             align-items: center;
             text-align: center;
             padding: 0 1rem;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
         }
 
         .hero h1 {
@@ -84,22 +94,25 @@
         .hero p {
             font-size: 1.2rem;
             color: #94a3b8;
-            max-width: 600px;
+            max-width: 700px;
             margin-bottom: 2rem;
+            font-style: italic;
         }
 
         .btn {
             padding: 0.8rem 2rem;
-            background: var(--accent-color);
-            color: #0f172a;
+            background: transparent;
+            color: var(--accent-color);
             font-weight: 600;
-            border-radius: 5px;
+            border-radius: 30px;
             border: 2px solid var(--accent-color);
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background: transparent;
-            color: var(--accent-color);
+            background: var(--accent-color);
+            color: #0f172a;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
         /* --- CÁC SECTION CHUNG --- */
@@ -112,6 +125,9 @@
             margin-bottom: 3rem;
             text-align: center;
             position: relative;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
         h2.section-title::after {
@@ -125,56 +141,135 @@
             transform: translateX(-50%);
         }
 
-        /* --- VỀ TÔI & KỸ NĂNG --- */
+        /* --- VỀ TÔI (PROFILE GRID) --- */
         .about-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 2fr;
             gap: 3rem;
-            align-items: center;
+            align-items: start;
         }
 
-        .about-text h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
+        .about-img img {
+            width: 100%;
+            border-radius: 15px;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .skills-grid {
+        .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .skill-item {
-            background: var(--card-bg);
-            padding: 1rem;
-            text-align: center;
-            border-radius: 8px;
+        .info-item h4 {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .info-item span {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .hobby-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .hobby-tag {
+            background: #334155;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #475569;
+        }
+
+        /* --- TIMELINE (KINH NGHIỆM) --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--timeline-line);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left { left: 0; }
+        .right { left: 50%; }
+        .left::before { content: " "; height: 0; position: absolute; top: 18px; width: 0; z-index: 1; right: 30px; border: medium solid white; border-width: 10px 0 10px 10px; border-color: transparent transparent transparent var(--card-bg); }
+        .right::before { content: " "; height: 0; position: absolute; top: 18px; width: 0; z-index: 1; left: 30px; border: medium solid white; border-width: 10px 10px 10px 0; border-color: transparent var(--card-bg) transparent transparent; }
+        .right::after { left: -8px; }
+
+        .content {
+            padding: 20px 30px;
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: 6px;
             border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* --- DỰ ÁN NỔI BẬT --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
             transition: transform 0.3s;
-            border: 1px solid rgba(255,255,255,0.05);
         }
-
-        .project-card:hover {
+        
+        .content:hover {
             transform: translateY(-5px);
             border-color: var(--accent-color);
         }
 
-        .project-card h3 {
+        .content h3 { color: var(--accent-color); font-size: 1.1rem; }
+        .content h4 { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 5px; }
+        .content p { font-size: 0.85rem; color: #94a3b8; }
+
+        /* --- AWARDS (THÀNH TÍCH) --- */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .award-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .award-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
             margin-bottom: 1rem;
         }
 
@@ -189,14 +284,41 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
-            font-size: 1.5rem;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover {
+            background: var(--accent-color);
+            color: #0f172a;
+            transform: translateY(-5px);
         }
 
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.2rem; }
             .about-container { grid-template-columns: 1fr; }
-            .nav-links { display: none; } /* Đơn giản hóa cho mobile */
+            .info-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            
+            /* Timeline Mobile */
+            .timeline::after { left: 31px; }
+            .container { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .container::before { left: 60px; border: medium solid white; border-width: 10px 10px 10px 0; border-color: transparent var(--card-bg) transparent transparent; }
+            .left::after, .right::after { left: 23px; }
+            .right { left: 0%; }
         }
     </style>
 </head>
@@ -208,15 +330,19 @@
             <ul class="nav-links">
                 <li><a href="#home">Trang chủ</a></li>
                 <li><a href="#about">Về tôi</a></li>
-                <li><a href="#projects">Dự án</a></li>
+                <li><a href="#experience">Hành trình</a></li>
+                <li><a href="#awards">Thành tích</a></li>
                 <li><a href="#contact">Liên hệ</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home" class="hero">
-        <h1>Xin chào, tôi là <span>Minh Khôi</span></h1>
-        <p id="typewriter">Học sinh trường THPT Chuyên Lê Quý Đôn - Nha Trang</p>
+        <h1>Xin chào, tôi là <span>Lưu Minh Khôi</span></h1>
+        <p>"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans."</p>
+        <div class="typewriter-effect" style="margin-bottom: 2rem; color: #94a3b8;">
+            Học sinh THPT Chuyên Lê Quý Đôn | Photographer | Theology Enthusiast
+        </div>
         <a href="#about" class="btn">Tìm hiểu thêm</a>
     </section>
 
@@ -224,83 +350,140 @@
         <h2 class="section-title">Về Bản Thân</h2>
         <div class="about-container">
             <div class="about-img">
-                <img src="https://via.placeholder.com/400x400/1e293b/38bdf8?text=MK" alt="Avatar Minh Khôi" style="width: 100%; border-radius: 10px; border: 2px solid var(--accent-color);">
+                <img src="Pio.jpg" alt="Lưu Minh Khôi" onerror="this.src='https://via.placeholder.com/400x400/1e293b/D4AF37?text=LMK'">
+                <p style="text-align: center; margin-top: 10px; font-style: italic; color: #64748b;">@minhkhoifoto.27</p>
             </div>
             <div class="about-text">
-                <h3>Đam mê Công nghệ & Sáng tạo</h3>
-                <p>
-                    Mình là một học sinh tại trường <strong>THPT Chuyên Lê Quý Đôn, Nha Trang</strong>. 
-                    Mình yêu thích việc tạo ra những sản phẩm kỹ thuật số, từ những dòng code phức tạp đến những khung hình đầy cảm xúc.
-                </p>
-                <br>
-                <p>
-                    Ngoài việc học tập trên trường, mình dành thời gian để nghiên cứu sâu về lập trình Web và phát triển các dự án cá nhân (như minhkhoifotography).
-                </p>
+                <h3 style="color: var(--accent-color); font-size: 1.5rem; margin-bottom: 1.5rem;">Thông tin cá nhân</h3>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>Ngày sinh</h4>
+                        <span>16/11/2008</span>
+                    </div>
+                    <div class="info-item">
+                        <h4>Trường học</h4>
+                        <span>THPT Chuyên Lê Quý Đôn - Nha Trang</span>
+                    </div>
+                    <div class="info-item">
+                        <h4>Tôn giáo</h4>
+                        <span>Catholic (Michaël – Pius)</span>
+                    </div>
+                    <div class="info-item">
+                        <h4>Email</h4>
+                        <span>luuminhkhoiworking@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <h4>Số điện thoại</h4>
+                        <span>(+84) 833 204 240</span>
+                    </div>
+                    <div class="info-item">
+                        <h4>Giới tính</h4>
+                        <span>Nam</span>
+                    </div>
+                </div>
 
-                <div class="skills-grid">
-                    <div class="skill-item">Web Dev</div>
-                    <div class="skill-item">Nhiếp ảnh</div>
-                    <div class="skill-item">Research</div>
-                    <div class="skill-item">Sáng tạo</div>
+                <h3 style="color: var(--accent-color); font-size: 1.2rem; margin-top: 2rem;">Sở thích & Đam mê</h3>
+                <div class="hobby-tags">
+                    <span class="hobby-tag">📷 Photography</span>
+                    <span class="hobby-tag">🎥 Videography</span>
+                    <span class="hobby-tag">✍️ Content Creator</span>
+                    <span class="hobby-tag">🤝 Diplomatic</span>
+                    <span class="hobby-tag">🎼 Vocal Music</span>
+                    <span class="hobby-tag">✝️ Theology</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects">
-        <h2 class="section-title">Dự Án & Hoạt Động</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>Minh Khoi Photography</h3>
-                <p>Dự án lưu giữ những khoảnh khắc đẹp qua ống kính cá nhân. Website trưng bày các bộ sưu tập ảnh nghệ thuật và kỷ yếu.</p>
-                <br>
-                <a href="#" style="color: var(--accent-color); font-size: 0.9rem;">Xem chi tiết &rarr;</a>
+    <section id="experience">
+        <h2 class="section-title">Hành trình & Kinh nghiệm</h2>
+        <div class="timeline">
+            <div class="container left">
+                <div class="content">
+                    <h3>Foreign Affairs Officer</h3>
+                    <h4>2025 - Present | Conferentia Episcoporum Vietnamie</h4>
+                    <p>Phụ trách công tác đối ngoại và ngoại giao.</p>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>Hành trình 1000 ngày</h3>
-                <p>Website kỷ yếu kỹ thuật số dành cho trường THPT Chuyên Lê Quý Đôn. Tích hợp lưu bút, thư viện ảnh và trình phát nhạc.</p>
-                <br>
-                <a href="#" style="color: var(--accent-color); font-size: 0.9rem;">Xem chi tiết &rarr;</a>
+            <div class="container right">
+                <div class="content">
+                    <h3>Mentor & Researcher</h3>
+                    <h4>2025 | Le Quy Don Science & Engineering Fair</h4>
+                    <p>Hướng dẫn và tham gia nghiên cứu khoa học kỹ thuật.</p>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>Nghiên cứu Khoa học</h3>
-                <p>Các bài nghiên cứu chuyên sâu về các chủ đề xã hội và triết học, thể hiện tư duy phản biện và góc nhìn đa chiều.</p>
-                <br>
-                <a href="#" style="color: var(--accent-color); font-size: 0.9rem;">Xem chi tiết &rarr;</a>
+            <div class="container left">
+                <div class="content">
+                    <h3>Photographer of LMC</h3>
+                    <h4>2023 - 2025 | Le Quy Don Media Club</h4>
+                    <p>Nhiếp ảnh gia, ghi lại những khoảnh khắc sự kiện của trường.</p>
+                </div>
+            </div>
+            <div class="container right">
+                <div class="content">
+                    <h3>Head of Collaborator (Tech & Control)</h3>
+                    <h4>2024 | MSOCE Management</h4>
+                    <p>Quản lý kỹ thuật và điều phối cộng tác viên.</p>
+                </div>
+            </div>
+            <div class="container left">
+                <div class="content">
+                    <h3>Professor of Vocal Music</h3>
+                    <h4>2017 - 2022 | Stella Maris Major Seminary</h4>
+                    <p>Hoạt động trong lĩnh vực thanh nhạc và thánh nhạc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="awards">
+        <h2 class="section-title">Thành tích nổi bật</h2>
+        <div class="awards-grid">
+            <div class="award-card">
+                <div class="award-icon"><i class="fa-solid fa-trophy"></i></div>
+                <h3 style="margin-bottom: 0.5rem;">Giải Nhất (1st Prize)</h3>
+                <p style="color: #94a3b8;">Le Quy Don Science and Engineering Fair <br> 2025-2026</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon"><i class="fa-solid fa-medal"></i></div>
+                <h3 style="margin-bottom: 0.5rem;">Giải Nhì (2nd Prize)</h3>
+                <p style="color: #94a3b8;">Le Quy Don Science and Engineering Fair <br> 2024-2025</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon"><i class="fa-solid fa-certificate"></i></div>
+                <h3 style="margin-bottom: 0.5rem;">Giải Ba (3rd Prize)</h3>
+                <p style="color: #94a3b8;">Khanh Hoa Science and Engineering Fair <br> 2024-2025</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon"><i class="fa-solid fa-scroll"></i></div>
+                <h3 style="margin-bottom: 0.5rem;">Papal Leo XIV's Blessing</h3>
+                <p style="color: #94a3b8;">Dedication to proclaiming the Gospel <br> (2025)</p>
             </div>
         </div>
     </section>
 
     <section id="contact" class="contact">
         <h2 class="section-title">Liên Hệ</h2>
-        <p>Kết nối với mình qua các nền tảng mạng xã hội</p>
+        <p style="margin-bottom: 2rem; color: #94a3b8;">Kết nối với mình qua các nền tảng mạng xã hội</p>
         <div class="social-links">
-            <a href="#">Facebook</a>
-            <a href="#">GitHub</a>
-            <a href="#">Email</a>
+            <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" class="social-btn" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" class="social-btn" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="mailto:luuminhkhoiworking@gmail.com" class="social-btn" title="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://locket.cam/minhkhoifoto" target="_blank" class="social-btn" title="Locket">
+                <i class="fa-solid fa-heart"></i>
+            </a>
         </div>
-        <p style="margin-top: 3rem; color: #64748b; font-size: 0.9rem;">
-            &copy; 2026 Minh Khôi. All rights reserved.
+        <p style="margin-top: 4rem; color: #64748b; font-size: 0.9rem;">
+            &copy; 2026 Lưu Minh Khôi. All rights reserved.
         </p>
     </section>
 
-    <script>
-        // Hiệu ứng gõ chữ đơn giản
-        const textElement = document.getElementById('typewriter');
-        const text = textElement.innerText;
-        textElement.innerText = '';
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                textElement.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50); // Tốc độ gõ
-            }
-        }
-        
-        // Chạy hiệu ứng khi tải trang
-        window.onload = typeWriter;
-    </script>
 </body>
 </html>
