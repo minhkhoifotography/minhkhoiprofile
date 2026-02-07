@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Luu Minh Khoi - Researcher, Photographer, and Theologian. Student at Le Quy Don High School for the Gifted.">
     <meta name="author" content="Luu Minh Khoi">
-    <meta name="theme-color" content="#A51C30"> <title>Lưu Minh Khôi | Personal Portfolio</title>
+    <meta name="theme-color" content="#A51C30">
+    <title>Lưu Minh Khôi | Personal Portfolio</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
 
@@ -20,7 +21,7 @@
     {
       "@context": "http://schema.org",
       "@type": "Person",
-      "name": "Luu Minh Khoi",
+      "name": "Lưu Minh Khoi",
       "jobTitle": "Researcher & Photographer",
       "url": "https://minhkhoifotography.github.io",
       "sameAs": [
@@ -54,6 +55,16 @@
             font-family: var(--font-sans); line-height: 1.6;
             -webkit-font-smoothing: antialiased; overflow-x: hidden;
         }
+
+        /* [VVIP 1] CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--harvard-crimson); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8a1526; }
+
+        /* [VVIP 2] SELECTION COLOR */
+        ::selection { background: var(--harvard-crimson); color: #fff; }
+        ::-moz-selection { background: var(--harvard-crimson); color: #fff; }
 
         /* CURSOR */
         .cursor-dot, .cursor-outline {
@@ -175,6 +186,21 @@
         .footer-links a { display: block; color: var(--white); margin-bottom: 10px; font-weight: 600; }
         .social-icons a { font-size: 1.5rem; margin-right: 20px; color: var(--white); transition: 0.3s; }
         .social-icons a:hover { color: var(--harvard-crimson); }
+
+        /* [VVIP 3] PRINT STYLES - CHẾ ĐỘ IN ẤN CHUYÊN NGHIỆP */
+        @media print {
+            .utility-bar, .fab-container, .progress-container, header, footer, #preloader, .cursor-dot, .cursor-outline, .btn-crimson, .nav-links { display: none !important; }
+            body { background: white; color: black; font-family: serif; }
+            .content-section { display: block !important; padding: 20px 0; }
+            .hero-grid { display: block; min-height: auto; }
+            .hero-content { padding: 0; color: black; }
+            .hero-title { font-size: 24pt; color: black; margin-bottom: 10px; }
+            .section-header h2 { font-size: 18pt; border-bottom: 1px solid black; color: black; }
+            .grid-3, .award-grid, .portfolio-grid { display: block; }
+            .news-card, .portfolio-card, .award-box { border: none; break-inside: avoid; margin-bottom: 20px; }
+            a { text-decoration: none; color: black; }
+            a[href]:after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }
+        }
 
         @media (max-width: 768px) {
             .hero-grid { grid-template-columns: 1fr; }
