@@ -12,106 +12,81 @@
             --text-color: #e2e8f0;
             --accent-color: #D4AF37;
             --card-bg: #1e293b;
-            --nav-bg: #0f172a; /* Đổi thành màu đặc để không bị lẫn nội dung khi fixed */
+            --nav-bg: #0f172a;
             --timeline-line: #334155;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            overflow-x: hidden; /* Tránh thanh cuộn ngang */
+            overflow-x: hidden;
         }
+
+        /* --- LOGIC ẨN/HIỆN NGÔN NGỮ --- */
+        /* Mặc định hiển thị Tiếng Việt (class .vi), ẩn Tiếng Anh (class .en) */
+        body.lang-vi .content-en { display: none !important; }
+        body.lang-en .content-vi { display: none !important; }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
         /* --- HEADER & NAV --- */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
+            position: fixed; top: 0; width: 100%;
             background: var(--nav-bg);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            z-index: 1000;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px; /* Cố định chiều cao header */
+            z-index: 1000; padding: 0 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 70px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
+            font-size: 1.5rem; font-weight: 700; color: var(--accent-color);
+            text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
+        .nav-container { display: flex; align-items: center; gap: 2rem; }
+
+        .nav-links { display: flex; gap: 1.5rem; }
 
         .nav-btn {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            padding: 0.5rem 0;
-            position: relative;
-            transition: 0.3s;
+            background: none; border: none; color: var(--text-color);
+            font-size: 0.95rem; font-weight: 500; cursor: pointer;
+            padding: 0.5rem 0; position: relative; transition: 0.3s;
         }
 
-        .nav-btn:hover, .nav-btn.active {
-            color: var(--accent-color);
-        }
-
-        /* Gạch chân cho tab đang active */
+        .nav-btn:hover, .nav-btn.active { color: var(--accent-color); }
         .nav-btn::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--accent-color);
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: 0; left: 0; background-color: var(--accent-color);
             transition: width 0.3s;
         }
+        .nav-btn.active::after { width: 100%; }
 
-        .nav-btn.active::after {
-            width: 100%;
+        /* Nút đổi ngôn ngữ */
+        .lang-switch {
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            background: transparent;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: 0.3s;
         }
+        .lang-switch:hover { background: var(--accent-color); color: var(--bg-color); }
 
         /* --- TAB CONTENT LOGIC --- */
-        /* Mặc định ẩn tất cả section */
         .tab-content {
-            display: none;
-            padding: 8rem 10% 5rem 10%; /* Tăng padding top để tránh header che */
-            min-height: 100vh; /* Full màn hình */
-            animation: fadeIn 0.5s ease-in-out; /* Hiệu ứng hiện dần */
+            display: none; padding: 8rem 10% 5rem 10%;
+            min-height: 100vh; animation: fadeIn 0.5s ease-in-out;
         }
-
-        /* Class để hiện section được chọn */
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Riêng tab Home dùng flexbox để căn giữa */
-        #home.active {
-            display: flex;
-        }
+        .tab-content.active { display: block; }
+        #home.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -120,26 +95,16 @@
 
         /* --- HERO SECTION --- */
         #home {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding-top: 0; /* Reset padding cho Home vì dùng Flex */
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
+            flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding-top: 0; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
         }
-
         .hero-title { font-size: 3.5rem; margin-bottom: 0.5rem; }
         .hero-title span { color: var(--accent-color); }
         .hero-motto { font-size: 1.2rem; color: #94a3b8; margin-bottom: 2rem; font-style: italic; }
         
         .cta-btn {
-            padding: 0.8rem 2rem;
-            color: var(--accent-color);
-            font-weight: 600;
-            border-radius: 30px;
-            border: 2px solid var(--accent-color);
-            cursor: pointer;
-            transition: 0.3s;
+            padding: 0.8rem 2rem; color: var(--accent-color); font-weight: 600;
+            border-radius: 30px; border: 2px solid var(--accent-color); cursor: pointer; transition: 0.3s;
         }
         .cta-btn:hover { background: var(--accent-color); color: #0f172a; }
 
@@ -194,75 +159,116 @@
             .hero-title { font-size: 2.2rem; }
             .about-container { grid-template-columns: 1fr; }
             .info-grid { grid-template-columns: 1fr; }
-            .nav-links { 
+            .nav-container { 
                 position: fixed; bottom: 0; left: 0; width: 100%; 
                 background: var(--nav-bg); padding: 1rem; 
                 justify-content: space-around; border-top: 1px solid var(--accent-color);
-                border-bottom: none;
+                flex-direction: row-reverse; /* Đảo ngược để nút lang không bị che */
             }
-            .nav-btn { font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; gap: 5px;}
-            /* Ẩn header top trên mobile nếu muốn, hoặc giữ logo */
-            header { padding: 0.5rem 1rem; justify-content: center; }
-            .nav-links .nav-btn::after { display: none; } /* Bỏ gạch chân trên mobile */
-            .nav-btn.active { color: var(--accent-color); font-weight: bold; }
-            
-            /* Timeline Mobile Fix */
-            .timeline::after { left: 31px; }
-            .container { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .container::before { left: 60px; border: medium solid white; border-width: 10px 10px 10px 0; border-color: transparent var(--card-bg) transparent transparent; }
-            .left::after, .right::after { left: 23px; }
-            .right { left: 0%; }
-            
-            .tab-content { padding-bottom: 100px; } /* Để không bị menu dưới che */
+            .nav-links { gap: 1rem; width: 100%; justify-content: space-around; }
+            .nav-btn { font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+            header { padding: 0.5rem 1rem; justify-content: space-between; }
+            .nav-btn .content-vi, .nav-btn .content-en { display: block; } /* Fix hiển thị trên mobile */
+            .lang-switch { position: absolute; top: 20px; right: 20px; } /* Đưa nút lang lên top trên mobile */
+            .tab-content { padding-bottom: 100px; }
         }
     </style>
 </head>
-<body>
+<body class="lang-vi">
 
     <header>
         <div class="logo" onclick="switchTab('home')">Minh Khôi.</div>
-        <nav>
+        
+        <button class="lang-switch" onclick="toggleLanguage()">VN / EN</button>
+
+        <nav class="nav-container">
             <div class="nav-links">
-                <button class="nav-btn active" onclick="switchTab('home')">Trang chủ</button>
-                <button class="nav-btn" onclick="switchTab('about')">Về tôi</button>
-                <button class="nav-btn" onclick="switchTab('experience')">Hành trình</button>
-                <button class="nav-btn" onclick="switchTab('awards')">Thành tích</button>
-                <button class="nav-btn" onclick="switchTab('contact')">Liên hệ</button>
+                <button class="nav-btn active" onclick="switchTab('home')">
+                    <span class="content-vi">Trang chủ</span><span class="content-en">Home</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('about')">
+                    <span class="content-vi">Về tôi</span><span class="content-en">About</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('experience')">
+                    <span class="content-vi">Hành trình</span><span class="content-en">Journey</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('awards')">
+                    <span class="content-vi">Thành tích</span><span class="content-en">Awards</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('contact')">
+                    <span class="content-vi">Liên hệ</span><span class="content-en">Contact</span>
+                </button>
             </div>
         </nav>
     </header>
 
     <section id="home" class="tab-content active">
-        <h1 class="hero-title">Xin chào, tôi là <span>Lưu Minh Khôi</span></h1>
+        <h1 class="hero-title">
+            <span class="content-vi">Xin chào, tôi là </span>
+            <span class="content-en">Hello, I am </span>
+            <span>Lưu Minh Khôi</span>
+        </h1>
         <p class="hero-motto">"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans."</p>
         <div style="margin-bottom: 2rem; color: #94a3b8;">
-            Học sinh THPT Chuyên Lê Quý Đôn | Photographer | Theology Enthusiast
+            <span class="content-vi">Học sinh THPT Chuyên Lê Quý Đôn | Photographer | Đam mê Thần học</span>
+            <span class="content-en">Student at Le Quy Don High School for the Gifted | Photographer | Theology Enthusiast</span>
         </div>
-        <button class="cta-btn" onclick="switchTab('about')">Tìm hiểu thêm</button>
+        <button class="cta-btn" onclick="switchTab('about')">
+            <span class="content-vi">Tìm hiểu thêm</span>
+            <span class="content-en">Learn More</span>
+        </button>
     </section>
 
     <section id="about" class="tab-content">
-        <h2 class="section-title">Về Bản Thân</h2>
+        <h2 class="section-title">
+            <span class="content-vi">Về Bản Thân</span>
+            <span class="content-en">About Me</span>
+        </h2>
         <div class="about-container">
             <div class="about-img">
                 <img src="Pio.jpg" alt="Lưu Minh Khôi" onerror="this.src='https://via.placeholder.com/400x400/1e293b/D4AF37?text=LMK'">
                 <p style="text-align: center; margin-top: 10px; font-style: italic; color: #64748b;">@minhkhoifoto.27</p>
             </div>
             <div class="about-text">
-                <h3 style="color: var(--accent-color); font-size: 1.5rem; margin-bottom: 1.5rem;">Thông tin cá nhân</h3>
+                <h3 style="color: var(--accent-color); font-size: 1.5rem; margin-bottom: 1.5rem;">
+                    <span class="content-vi">Thông tin cá nhân</span>
+                    <span class="content-en">Personal Information</span>
+                </h3>
                 <div class="info-grid">
-                    <div class="info-item"><h4>Ngày sinh</h4><span>16/11/2008</span></div>
-                    <div class="info-item"><h4>Trường học</h4><span>THPT Chuyên Lê Quý Đôn</span></div>
-                    <div class="info-item"><h4>Tôn giáo</h4><span>Catholic (Michaël – Pius)</span></div>
-                    <div class="info-item"><h4>Email</h4><span>luuminhkhoiworking@gmail.com</span></div>
-                    <div class="info-item"><h4>Số điện thoại</h4><span>(+84) 833 204 240</span></div>
-                    <div class="info-item"><h4>Giới tính</h4><span>Nam</span></div>
+                    <div class="info-item">
+                        <h4><span class="content-vi">Ngày sinh</span><span class="content-en">Date of Birth</span></h4>
+                        <span>16/11/2008</span>
+                    </div>
+                    <div class="info-item">
+                        <h4><span class="content-vi">Trường học</span><span class="content-en">School</span></h4>
+                        <span>THPT Chuyên Lê Quý Đôn</span>
+                    </div>
+                    <div class="info-item">
+                        <h4><span class="content-vi">Tôn giáo</span><span class="content-en">Religion</span></h4>
+                        <span>Catholic (Michaël – Pius)</span>
+                    </div>
+                    <div class="info-item">
+                        <h4>Email</h4>
+                        <span>luuminhkhoiworking@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <h4><span class="content-vi">Số điện thoại</span><span class="content-en">Phone</span></h4>
+                        <span>(+84) 833 204 240</span>
+                    </div>
+                    <div class="info-item">
+                        <h4><span class="content-vi">Giới tính</span><span class="content-en">Sex</span></h4>
+                        <span><span class="content-vi">Nam</span><span class="content-en">Male</span></span>
+                    </div>
                 </div>
-                <h3 style="color: var(--accent-color); font-size: 1.2rem; margin-top: 2rem;">Sở thích & Đam mê</h3>
+                
+                <h3 style="color: var(--accent-color); font-size: 1.2rem; margin-top: 2rem;">
+                    <span class="content-vi">Sở thích & Đam mê</span>
+                    <span class="content-en">Hobbies & Passions</span>
+                </h3>
                 <div class="hobby-tags">
                     <span class="hobby-tag">📷 Photography</span>
                     <span class="hobby-tag">🎥 Videography</span>
-                    <span class="hobby-tag">✍️ Content Creator</span>
+                    <span class="hobby-tag">🎨 Design</span> <span class="hobby-tag">✍️ Content Creator</span>
                     <span class="hobby-tag">🤝 Diplomatic</span>
                     <span class="hobby-tag">🎼 Vocal Music</span>
                     <span class="hobby-tag">✝️ Theology</span>
@@ -272,62 +278,82 @@
     </section>
 
     <section id="experience" class="tab-content">
-        <h2 class="section-title">Hành trình & Kinh nghiệm</h2>
+        <h2 class="section-title">
+            <span class="content-vi">Hành trình & Kinh nghiệm</span>
+            <span class="content-en">Journey & Experience</span>
+        </h2>
         <div class="timeline">
             <div class="container left">
                 <div class="content">
                     <h3>Foreign Affairs Officer</h3>
                     <h4>2025 - Present | Conferentia Episcoporum Vietnamie</h4>
-                    <p>Phụ trách công tác đối ngoại và ngoại giao.</p>
+                    <p class="content-vi">Phụ trách công tác đối ngoại và ngoại giao.</p>
+                    <p class="content-en">In charge of external affairs and diplomatic relations.</p>
                 </div>
             </div>
             <div class="container right">
                 <div class="content">
                     <h3>Mentor & Researcher</h3>
                     <h4>2025 | Le Quy Don Science & Engineering Fair</h4>
-                    <p>Hướng dẫn và tham gia nghiên cứu khoa học kỹ thuật.</p>
+                    <p class="content-vi">Hướng dẫn và tham gia nghiên cứu khoa học kỹ thuật.</p>
+                    <p class="content-en">Instructing and participating in scientific and engineering research.</p>
                 </div>
             </div>
             <div class="container left">
                 <div class="content">
                     <h3>Photographer of LMC</h3>
                     <h4>2023 - 2025 | Le Quy Don Media Club</h4>
-                    <p>Nhiếp ảnh gia, ghi lại những khoảnh khắc sự kiện của trường.</p>
+                    <p class="content-vi">Nhiếp ảnh gia, ghi lại những khoảnh khắc sự kiện của trường.</p>
+                    <p class="content-en">Photographer, capturing moments at school events.</p>
                 </div>
             </div>
             <div class="container right">
                 <div class="content">
                     <h3>Head of Collaborator (Tech & Control)</h3>
                     <h4>2024 | MSOCE Management</h4>
-                    <p>Quản lý kỹ thuật và điều phối cộng tác viên.</p>
+                    <p class="content-vi">Quản lý kỹ thuật và điều phối cộng tác viên.</p>
+                    <p class="content-en">Technical management and collaborator coordination.</p>
                 </div>
             </div>
             <div class="container left">
                 <div class="content">
                     <h3>Professor of Vocal Music</h3>
                     <h4>2017 - 2022 | Stella Maris Major Seminary</h4>
-                    <p>Hoạt động trong lĩnh vực thanh nhạc và thánh nhạc.</p>
+                    <p class="content-vi">Hoạt động trong lĩnh vực thanh nhạc và thánh nhạc.</p>
+                    <p class="content-en">Active in the field of vocal and sacred music.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="awards" class="tab-content">
-        <h2 class="section-title">Thành tích nổi bật</h2>
+        <h2 class="section-title">
+            <span class="content-vi">Thành tích nổi bật</span>
+            <span class="content-en">Honors & Awards</span>
+        </h2>
         <div class="awards-grid">
             <div class="award-card">
                 <div class="award-icon"><i class="fa-solid fa-trophy"></i></div>
-                <h3>Giải Nhất (1st Prize)</h3>
+                <h3>
+                    <span class="content-vi">Giải Nhất (1st Prize)</span>
+                    <span class="content-en">First Prize</span>
+                </h3>
                 <p style="color: #94a3b8;">Le Quy Don Science and Engineering Fair <br> 2025-2026</p>
             </div>
             <div class="award-card">
                 <div class="award-icon"><i class="fa-solid fa-medal"></i></div>
-                <h3>Giải Nhì (2nd Prize)</h3>
+                <h3>
+                    <span class="content-vi">Giải Nhì (2nd Prize)</span>
+                    <span class="content-en">Second Prize</span>
+                </h3>
                 <p style="color: #94a3b8;">Le Quy Don Science and Engineering Fair <br> 2024-2025</p>
             </div>
             <div class="award-card">
                 <div class="award-icon"><i class="fa-solid fa-certificate"></i></div>
-                <h3>Giải Ba (3rd Prize)</h3>
+                <h3>
+                    <span class="content-vi">Giải Ba (3rd Prize)</span>
+                    <span class="content-en">Third Prize</span>
+                </h3>
                 <p style="color: #94a3b8;">Khanh Hoa Science and Engineering Fair <br> 2024-2025</p>
             </div>
             <div class="award-card">
@@ -339,9 +365,15 @@
     </section>
 
     <section id="contact" class="tab-content">
-        <h2 class="section-title">Liên Hệ</h2>
+        <h2 class="section-title">
+            <span class="content-vi">Liên Hệ</span>
+            <span class="content-en">Contact</span>
+        </h2>
         <div class="contact-wrapper">
-            <p style="margin-bottom: 2rem; color: #94a3b8;">Kết nối với mình qua các nền tảng mạng xã hội</p>
+            <p style="margin-bottom: 2rem; color: #94a3b8;">
+                <span class="content-vi">Kết nối với mình qua các nền tảng mạng xã hội</span>
+                <span class="content-en">Connect with me via social media</span>
+            </p>
             <div class="social-links">
                 <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
@@ -355,32 +387,34 @@
     </section>
 
     <script>
+        // Chuyển Tab
         function switchTab(tabId) {
-            // 1. Ẩn tất cả nội dung các tab
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
+            contents.forEach(content => content.classList.remove('active'));
 
-            // 2. Bỏ trạng thái active của tất cả các nút
             const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-            });
+            buttons.forEach(btn => btn.classList.remove('active'));
 
-            // 3. Hiện tab được chọn
             document.getElementById(tabId).classList.add('active');
 
-            // 4. Highlight nút được chọn (Tìm nút nào gọi hàm switchTab với id tương ứng)
-            // Lặp qua để tìm nút nào có onclick chứa id đó để add class active
             buttons.forEach(btn => {
                 if(btn.getAttribute('onclick').includes(tabId)) {
                     btn.classList.add('active');
                 }
             });
-            
-            // 5. Cuộn lên đầu trang (nếu trang dài)
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Chuyển Ngôn Ngữ
+        function toggleLanguage() {
+            const body = document.body;
+            if (body.classList.contains('lang-vi')) {
+                body.classList.remove('lang-vi');
+                body.classList.add('lang-en');
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-vi');
+            }
         }
     </script>
 </body>
