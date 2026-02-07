@@ -12,7 +12,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
@@ -38,7 +37,7 @@
             font-family: var(--font-sans);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden; /* Tránh thanh cuộn ngang do animation */
+            overflow-x: hidden;
         }
 
         /* --- UTILS --- */
@@ -88,7 +87,7 @@
         }
         .nav-btn:hover, .nav-btn.active { opacity: 1; border-color: var(--white); }
 
-        /* --- [TÍNH NĂNG 6] & LANG BUTTON --- */
+        /* --- ACTION BUTTONS --- */
         .fab-container {
             position: fixed; bottom: 30px; right: 30px;
             display: flex; flex-direction: column; gap: 15px; z-index: 2000;
@@ -105,7 +104,6 @@
         }
         .fab-btn:hover { transform: scale(1.1); background-color: #8a1526; }
         
-        /* Ẩn nút Back To Top mặc định */
         #backToTop { opacity: 0; visibility: hidden; }
         #backToTop.show { opacity: 1; visibility: visible; }
 
@@ -136,7 +134,6 @@
 
         /* --- CONTENT SECTIONS --- */
         .content-section { padding: 80px 0; background-color: var(--white); display: none; }
-        /* AOS sẽ lo phần animation, chỉ cần display block khi active */
         .content-section.active { display: block; } 
 
         .section-header { margin-bottom: 50px; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
@@ -172,9 +169,8 @@
         }
         .academic-year { font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .academic-role { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; margin: 5px 0; line-height: 1.2;}
-        .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); margin-bottom: 5px; display: block; }
+        .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); margin-bottom: 10px; display: block; }
         
-        /* [TÍNH NĂNG 5] STYLING CHO CHI TIẾT CÔNG VIỆC */
         .academic-details {
             list-style-type: disc; padding-left: 20px; margin-top: 10px; color: var(--text-light); font-size: 0.95rem;
         }
@@ -188,7 +184,7 @@
         .award-box:hover { background: #e5e5e5; }
         .award-icon { font-size: 2rem; color: var(--harvard-crimson); }
 
-        /* [TÍNH NĂNG 2] PORTFOLIO GRID */
+        /* Portfolio Grid */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .portfolio-card {
             background: #fff; border: 1px solid #eee; overflow: hidden;
@@ -318,12 +314,12 @@
                         <em style="color: #666;">"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans." (-Jeremias 31:3-)</em>
                         </p>
                     </div>
-                    <div style="margin-top: 20px;">
-                         <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                         <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                         <a href="https://locket.cam/minhkhoifoto" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Locket"><i class="fa-solid fa-heart"></i></a>
-                         <a href="https://wa.me/qr/EHDNZFH6A7FWG1" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                         <a href="https://www.linkedin.com/in/minh-kh%C3%B4i-l%C6%B0u-0613133ab/" target="_blank" style="font-size: 1.2rem;" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 15px;">
+                         <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-facebook"></i></a>
+                         <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-instagram"></i></a>
+                         <a href="https://locket.cam/minhkhoifoto" target="_blank" style="font-size: 1.2rem;"><i class="fa-solid fa-heart"></i></a>
+                         <a href="https://wa.me/qr/EHDNZFH6A7FWG1" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-whatsapp"></i></a>
+                         <a href="https://www.linkedin.com/in/minh-kh%C3%B4i-l%C6%B0u-0613133ab/" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-linkedin"></i></a>
                     </div>
                 </div>
 
@@ -409,6 +405,12 @@
                     <div class="academic-year">2024 - 2025</div>
                     <div class="academic-role">Vice Professor of Theology</div>
                     <span class="academic-place">Phuoc Hoa Parish</span>
+                    <ul class="academic-details">
+                        <li>
+                            <span class="content-vi">Hỗ trợ giảng dạy giáo lý và tổ chức các hoạt động sinh hoạt tôn giáo cho thiếu nhi.</span>
+                            <span class="content-en">Assisting in teaching catechism and organizing religious activities for children.</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="academic-item" data-aos="fade-left">
@@ -427,18 +429,36 @@
                     <div class="academic-year">2024</div>
                     <div class="academic-role">Head of Collaborator (Tech & Control)</div>
                     <span class="academic-place">MSOCE Management</span>
+                    <ul class="academic-details">
+                        <li>
+                            <span class="content-vi">Quản lý đội ngũ cộng tác viên kỹ thuật, đảm bảo vận hành trơn tru các hệ thống âm thanh và ánh sáng.</span>
+                            <span class="content-en">Managing the technical collaborator team, ensuring smooth operation of sound and lighting systems.</span>
+                        </li>
+                    </ul>
                 </div>
 
                  <div class="academic-item" data-aos="fade-left">
                     <div class="academic-year">2023 - 2024</div>
                     <div class="academic-role">Member of Logistics Department</div>
                     <span class="academic-place">We Know We Share 2024</span>
+                    <ul class="academic-details">
+                        <li>
+                            <span class="content-vi">Tham gia lập kế hoạch và điều phối hậu cần cho sự kiện gây quỹ từ thiện.</span>
+                            <span class="content-en">Participating in planning and coordinating logistics for charity fundraising events.</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="academic-item" data-aos="fade-left">
                     <div class="academic-year">2017 - 2022</div>
                     <div class="academic-role">Professor of Vocal Music</div>
                     <span class="academic-place">Stella Maris Major Seminary</span>
+                    <ul class="academic-details">
+                        <li>
+                            <span class="content-vi">Hướng dẫn kỹ thuật thanh nhạc và chỉ huy dàn hợp xướng trong các nghi thức phụng vụ.</span>
+                            <span class="content-en">Instructing vocal techniques and conducting choirs in liturgical ceremonies.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -626,7 +646,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // [TÍNH NĂNG 6] Back to Top Logic
+        // Back to Top Logic
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
