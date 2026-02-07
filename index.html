@@ -10,7 +10,7 @@
     <style>
         /* --- HARVARD DESIGN TOKENS --- */
         :root {
-            --harvard-crimson: #A51C30; /* The Iconic Color */
+            --harvard-crimson: #A51C30;
             --harvard-black: #1e1e1e;
             --harvard-gray: #f3f3f3;
             --text-dark: #292929;
@@ -35,14 +35,9 @@
         body.lang-en .content-vi { display: none !important; }
         a { text-decoration: none; color: inherit; transition: 0.2s; }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         /* --- HEADER --- */
-        /* Utility Bar (Black) */
         .utility-bar {
             background-color: var(--harvard-black);
             color: var(--white);
@@ -55,7 +50,6 @@
         .utility-wrapper { display: flex; justify-content: flex-end; gap: 20px; }
         .utility-link:hover { text-decoration: underline; color: #ddd; }
 
-        /* Main Header (Crimson) */
         header {
             background-color: var(--harvard-crimson);
             color: var(--white);
@@ -69,157 +63,88 @@
         }
 
         .logo {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-            cursor: pointer;
+            font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700;
+            letter-spacing: -0.5px; text-transform: uppercase; cursor: pointer;
         }
         .logo span { font-weight: 300; opacity: 0.9; font-size: 1.4rem; text-transform: none; display: block; line-height: 0.8;}
 
         .nav-links { display: flex; gap: 30px; }
-        
         .nav-btn {
             background: none; border: none; color: var(--white);
             font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem;
             cursor: pointer; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px;
             padding-bottom: 4px; border-bottom: 2px solid transparent;
         }
-
         .nav-btn:hover, .nav-btn.active { opacity: 1; border-color: var(--white); }
 
-        /* --- FLOATING ACTION BUTTON (LANGUAGE) --- */
+        /* --- FLOATING ACTION BUTTON --- */
         .fab-lang {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: var(--harvard-crimson);
-            color: var(--white);
-            border-radius: 50%;
-            border: 2px solid var(--white);
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background-color: var(--harvard-crimson); color: var(--white);
+            border-radius: 50%; border: 2px solid var(--white);
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 2000;
-            font-family: var(--font-sans);
-            font-weight: 700;
-            font-size: 0.8rem;
-            transition: transform 0.3s ease, background-color 0.3s;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 2000;
+            font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem;
+            transition: transform 0.3s ease;
         }
+        .fab-lang:hover { transform: scale(1.1); background-color: #8a1526; }
 
-        .fab-lang:hover {
-            transform: scale(1.1);
-            background-color: #8a1526;
-        }
-
-        /* --- HERO SECTION (Featured Story Style) --- */
-        .hero {
-            background-color: var(--harvard-black);
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 550px;
-        }
-
+        /* --- HERO SECTION --- */
+        .hero { background-color: var(--harvard-black); color: var(--white); position: relative; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 550px; }
         .hero-image {
-            background-image: url('Pio.jpg'); /* Đảm bảo file ảnh của bạn tên là Pio.jpg */
-            background-size: cover;
-            background-position: center;
-            position: relative;
+            background-image: url('Pio.png'); background-size: cover; background-position: center; position: relative;
         }
-        /* Fallback nếu không có ảnh */
-        .hero-image::before {
-            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.2);
-        }
-
-        .hero-content {
-            padding: 80px 60px;
-            display: flex; flex-direction: column; justify-content: center;
-            background: var(--harvard-black);
-        }
-
+        .hero-image::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.2); }
+        .hero-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; background: var(--harvard-black); }
+        
         .section-label {
-            color: #FFD700; /* Gold for contrast */
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            font-size: 0.85rem; margin-bottom: 15px;
-            display: flex; align-items: center; gap: 10px;
+            color: #FFD700; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            font-size: 0.85rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;
         }
         .section-label::before { content:''; width: 20px; height: 2px; background: #FFD700; }
 
-        .hero-title {
-            font-family: var(--font-serif);
-            font-size: 3rem; line-height: 1.1; margin-bottom: 25px;
-        }
-
-        .hero-desc {
-            font-size: 1.1rem; color: #cccccc; margin-bottom: 40px; font-weight: 300;
-        }
-
+        .hero-title { font-family: var(--font-serif); font-size: 3rem; line-height: 1.1; margin-bottom: 25px; }
+        .hero-desc { font-size: 1.1rem; color: #cccccc; margin-bottom: 40px; font-weight: 300; }
+        
         .btn-crimson {
-            display: inline-block;
-            background-color: var(--harvard-crimson);
-            color: var(--white);
-            padding: 15px 30px;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            font-size: 0.9rem;
-            width: fit-content;
-            transition: 0.3s;
+            display: inline-block; background-color: var(--harvard-crimson); color: var(--white);
+            padding: 15px 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            font-size: 0.9rem; width: fit-content; transition: 0.3s;
         }
         .btn-crimson:hover { background-color: #8a1526; }
 
-        /* --- CONTENT GRID (In Focus / News Style) --- */
+        /* --- CONTENT SECTIONS --- */
         .content-section { padding: 80px 0; background-color: var(--white); display: none; }
         .content-section.active { display: block; animation: fadeIn 0.8s; }
-        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .section-header {
-            margin-bottom: 50px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
-        }
-        .section-header h2 {
-            font-family: var(--font-serif);
-            font-size: 2.2rem; color: var(--harvard-crimson);
-        }
+        .section-header { margin-bottom: 50px; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
+        .section-header h2 { font-family: var(--font-serif); font-size: 2.2rem; color: var(--harvard-crimson); }
 
-        /* About Grid */
-        .grid-3 {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
-        }
-
-        .news-card {
-            border-top: 4px solid var(--harvard-crimson);
-            padding-top: 20px;
-        }
-        .news-cat {
-            color: var(--harvard-crimson); font-weight: 700; text-transform: uppercase;
-            font-size: 0.8rem; margin-bottom: 10px; display: block;
-        }
-        .news-title {
-            font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.3;
-            margin-bottom: 15px; font-weight: 700;
-        }
+        /* Grid System */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        
+        /* News/Info Cards */
+        .news-card { border-top: 4px solid var(--harvard-crimson); padding-top: 20px; }
+        .news-cat { color: var(--harvard-crimson); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 10px; display: block; }
+        .news-title { font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.3; margin-bottom: 15px; font-weight: 700; }
         .news-excerpt { font-size: 0.95rem; color: var(--text-light); }
+        
         .news-list li {
             border-bottom: 1px solid #eee; padding: 12px 0;
-            display: flex; justify-content: space-between;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .news-list strong { color: var(--harvard-black); }
+        .news-list strong { color: var(--harvard-black); text-align: right; max-width: 60%; }
+        
+        .hobby-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .tag {
+            background: #eee; padding: 4px 10px; font-size: 0.8rem; border-radius: 4px; font-weight: 600; color: #333;
+        }
 
-        /* Timeline (Academic Style) */
+        /* Timeline */
         .academic-list { border-left: 2px solid var(--harvard-crimson); padding-left: 30px; }
         .academic-item { margin-bottom: 40px; position: relative; }
         .academic-item::before {
@@ -227,49 +152,31 @@
             width: 10px; height: 10px; background: var(--white);
             border: 2px solid var(--harvard-crimson); border-radius: 50%;
         }
-        .academic-year {
-            font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem;
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-        .academic-role {
-            font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; margin: 5px 0;
-        }
-        .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); }
+        .academic-year { font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .academic-role { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; margin: 5px 0; line-height: 1.2;}
+        .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); margin-bottom: 5px; }
 
         /* Awards */
         .award-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .award-box {
-            background: var(--harvard-gray); padding: 30px;
-            display: flex; gap: 20px; align-items: start;
-            transition: 0.3s;
+            background: var(--harvard-gray); padding: 30px; display: flex; gap: 20px; align-items: start; transition: 0.3s;
         }
         .award-box:hover { background: #e5e5e5; }
         .award-icon { font-size: 2rem; color: var(--harvard-crimson); }
 
-        /* --- FOOTER --- */
-        footer {
-            background-color: var(--harvard-black);
-            color: var(--white);
-            padding: 60px 0;
-            margin-top: auto;
-        }
+        /* Footer */
+        footer { background-color: var(--harvard-black); color: var(--white); padding: 60px 0; margin-top: auto; }
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
-        .footer-col h4 {
-            color: #999; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
-            margin-bottom: 20px; font-weight: 700;
-        }
+        .footer-col h4 { color: #999; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; font-weight: 700; }
         .footer-links a { display: block; color: var(--white); margin-bottom: 10px; font-weight: 600; }
-        .footer-links a:hover { text-decoration: underline; }
         .social-icons a { font-size: 1.5rem; margin-right: 20px; }
 
-        /* --- MOBILE --- */
         @media (max-width: 768px) {
             .hero-grid { grid-template-columns: 1fr; }
             .hero-image { height: 300px; }
             .grid-3, .award-grid, .footer-grid { grid-template-columns: 1fr; }
             .header-inner { height: auto; padding: 15px 0; flex-direction: column; gap: 10px; }
             .nav-links { gap: 15px; font-size: 0.8rem; }
-            .fab-lang { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -280,7 +187,7 @@
             <a href="mailto:luuminhkhoiworking@gmail.com" class="utility-link">
                 <i class="fa-solid fa-envelope" style="margin-right: 5px;"></i> Contact
             </a>
-            </div>
+        </div>
     </div>
 
     <header>
@@ -306,15 +213,12 @@
         <div class="hero">
             <div class="hero-grid">
                 <div class="hero-image"></div>
-                
                 <div class="hero-content">
                     <div class="section-label">In Focus</div>
-                    
                     <h1 class="hero-title">
                         <span class="content-vi">Đôi nét về Minh Khôi</span>
                         <span class="content-en">About Minh Khoi</span>
                     </h1>
-                    
                     <p class="hero-desc">
                         <span class="content-vi">
                             Cuộc sống với tôi là một hành trình dài truy cầu Chân - Thiện - Mỹ. Từ tư duy logic của khoa học máy tính, tôi tìm thấy rung cảm qua ống kính nhiếp ảnh và chiều sâu trong tư tưởng Thần học. Đây là nơi lưu giữ quá trình tôi trưởng thành, kiến tạo bản sắc và thực hiện khát vọng phụng sự xã hội.
@@ -323,7 +227,6 @@
                             Life to me is a long journey in pursuit of Truth, Goodness, and Beauty. From the logic of computer science, I found emotion through the lens of photography and depth in theological thought. This is where I archive my growth, identity creation, and aspiration to serve society.
                         </span>
                     </p>
-
                     <a href="#" onclick="switchTab('about')" class="btn-crimson">
                         <span class="content-vi">Đọc thêm về tôi</span>
                         <span class="content-en">Read Biography</span>
@@ -346,48 +249,41 @@
                 <div class="news-card">
                     <span class="news-cat">Biography</span>
                     <h3 class="news-title">Lưu Minh Khôi</h3>
-                    
-                    <div class="news-excerpt content-vi" style="text-align: justify;">
-                        <p style="margin-bottom: 10px;">
-                            Lưu Minh Khôi là một học sinh tại trường <strong>THPT Chuyên Lê Quý Đôn (Nha Trang)</strong> với niềm đam mê sâu sắc dành cho công nghệ, nhiếp ảnh và thần học.
-                        </p>
-                        <p>
-                            Với tư duy cầu tiến và tinh thần phục vụ, Khôi luôn tìm cách kết hợp các kỹ năng kỹ thuật với các giá trị nhân văn để tạo ra những tác động tích cực cho cộng đồng.
+                    <div class="news-excerpt">
+                        <p style="margin-bottom:10px;">@minhkhoifoto.27</p>
+                        <p><strong>Motto:</strong><br> 
+                        <em style="color: #666;">"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans." (-Jeremias 31:3-)</em>
                         </p>
                     </div>
-
-                    <div class="news-excerpt content-en" style="text-align: justify;">
-                        <p style="margin-bottom: 10px;">
-                            Luu Minh Khoi is a student at <strong>Le Quy Don High School for the Gifted (Nha Trang)</strong> with a deep passion for technology, photography, and theology.
-                        </p>
-                        <p>
-                            With a progressive mindset and a spirit of service, Khoi consistently seeks to combine technical skills with humanistic values to create positive impacts for the community.
-                        </p>
-                    </div>
-
-                    <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
-                        <span style="font-family: 'Merriweather', serif; font-style: italic; font-size: 0.85rem; color: #666;">
-                            Class of 2026 Candidate
-                        </span>
+                    <div style="margin-top: 20px;">
+                         <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" style="margin-right: 15px; font-size: 1.2rem;"><i class="fa-brands fa-facebook"></i></a>
+                         <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" style="margin-right: 15px; font-size: 1.2rem;"><i class="fa-brands fa-instagram"></i></a>
+                         <a href="https://locket.cam/minhkhoifoto" target="_blank" style="font-size: 1.2rem;"><i class="fa-solid fa-heart"></i></a>
                     </div>
                 </div>
 
                 <div class="news-card">
                     <span class="news-cat">Details</span>
                     <ul class="news-list" style="list-style: none;">
-                        <li><span>Date of Birth</span> <strong>16/11/2008</strong></li>
+                        <li><span>BOD</span> <strong>16/11/2008</strong></li>
+                        <li><span>Phone</span> <strong>(+84) 833 204 240</strong></li>
                         <li><span>Religion</span> <strong>Catholic (Michaël – Pius)</strong></li>
-                        <li><span>Role</span> <strong>Photographer / Researcher</strong></li>
-                        <li><span>Email</span> <strong>luuminhkhoiworking@...</strong></li>
+                        <li><span>Sex</span> <strong>Male</strong></li>
+                        <li><span>Email</span> <strong style="font-size: 0.8rem;">luuminhkhoiworking@...</strong></li>
+                        <li><span>Position</span> <strong>Prof. of Vocal Music</strong></li>
                     </ul>
                 </div>
 
                 <div class="news-card">
-                    <span class="news-cat">Research Interests</span>
-                    <h3 class="news-title" style="font-size: 1.2rem;">Areas of Focus</h3>
-                    <p class="news-excerpt">
-                        Photography, Videography, Design, Diplomatic Relations, Vocal Music, and Catholic Theology.
-                    </p>
+                    <span class="news-cat">Interests & Hobbies</span>
+                    <div class="hobby-tags">
+                        <span class="tag">📷 Photography</span>
+                        <span class="tag">🎥 Videography</span>
+                        <span class="tag">✍️ Content Creator</span>
+                        <span class="tag">🤝 Diplomatic</span>
+                        <span class="tag">🎼 Vocal Music</span>
+                        <span class="tag">✝️ Theology</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -397,8 +293,8 @@
         <div class="container">
             <div class="section-header">
                 <h2>
-                    <span class="content-vi">Học thuật & Kinh nghiệm</span>
-                    <span class="content-en">Academics & Experience</span>
+                    <span class="content-vi">Hành trình & Kinh nghiệm</span>
+                    <span class="content-en">Journey & Experience</span>
                 </h2>
             </div>
 
@@ -407,22 +303,42 @@
                     <div class="academic-year">2025 - Present</div>
                     <div class="academic-role">Foreign Affairs Officer</div>
                     <div class="academic-place">Conferentia Episcoporum Vietnamie</div>
-                    <p class="content-vi" style="margin-top: 10px;">Phụ trách công tác đối ngoại và ngoại giao.</p>
-                    <p class="content-en" style="margin-top: 10px;">In charge of external affairs and diplomatic relations.</p>
+                </div>
+
+                <div class="academic-item">
+                    <div class="academic-year">2025 - Present</div>
+                    <div class="academic-role">Professor of Theology</div>
+                    <div class="academic-place">Nha Trang Cathedral</div>
                 </div>
 
                 <div class="academic-item">
                     <div class="academic-year">2025</div>
-                    <div class="academic-role">Mentor & Researcher</div>
-                    <div class="academic-place">Le Quy Don Science & Engineering Fair</div>
-                    <p class="content-vi" style="margin-top: 10px;">Hướng dẫn và tham gia nghiên cứu khoa học kỹ thuật.</p>
-                    <p class="content-en" style="margin-top: 10px;">Research mentor for science and engineering projects.</p>
+                    <div class="academic-role">Mentor</div>
+                    <div class="academic-place">Le Quy Don Science and Engineering Fair</div>
+                </div>
+
+                <div class="academic-item">
+                    <div class="academic-year">2024 - 2025</div>
+                    <div class="academic-role">Vice Professor of Theology</div>
+                    <div class="academic-place">Phuoc Hoa Parish</div>
                 </div>
 
                 <div class="academic-item">
                     <div class="academic-year">2023 - 2025</div>
-                    <div class="academic-role">Official Photographer</div>
-                    <div class="academic-place">Le Quy Don Media Club (LMC)</div>
+                    <div class="academic-role">Photographer of LMC</div>
+                    <div class="academic-place">Le Quy Don Media Club</div>
+                </div>
+
+                <div class="academic-item">
+                    <div class="academic-year">2024</div>
+                    <div class="academic-role">Head of Collaborator (Tech & Control)</div>
+                    <div class="academic-place">MSOCE Management</div>
+                </div>
+
+                 <div class="academic-item">
+                    <div class="academic-year">2023 - 2024</div>
+                    <div class="academic-role">Member of Logistics Department</div>
+                    <div class="academic-place">We Know We Share 2024</div>
                 </div>
 
                 <div class="academic-item">
@@ -447,27 +363,27 @@
                 <div class="award-box">
                     <i class="fa-solid fa-trophy award-icon"></i>
                     <div>
-                        <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">First Prize</h3>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">1st Prize</h3>
                         <div style="font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem;">Le Quy Don Science & Engineering Fair</div>
-                        <p style="font-size: 0.9rem; color: #666;">2025 - 2026 Academic Year</p>
+                        <p style="font-size: 0.9rem; color: #666;">2025 - 2026</p>
                     </div>
                 </div>
 
                 <div class="award-box">
                     <i class="fa-solid fa-medal award-icon"></i>
                     <div>
-                        <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">Second Prize</h3>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">2nd Prize</h3>
                         <div style="font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem;">Le Quy Don Science & Engineering Fair</div>
-                        <p style="font-size: 0.9rem; color: #666;">2024 - 2025 Academic Year</p>
+                        <p style="font-size: 0.9rem; color: #666;">2024 - 2025</p>
                     </div>
                 </div>
 
                 <div class="award-box">
                     <i class="fa-solid fa-certificate award-icon"></i>
                     <div>
-                        <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">Third Prize</h3>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">3rd Prize</h3>
                         <div style="font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem;">Khanh Hoa Science & Engineering Fair</div>
-                        <p style="font-size: 0.9rem; color: #666;">Provincial Level</p>
+                        <p style="font-size: 0.9rem; color: #666;">2024 - 2025</p>
                     </div>
                 </div>
 
@@ -476,7 +392,7 @@
                     <div>
                         <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">Papal Leo XIV's Blessing</h3>
                         <div style="font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem;">Recognition of Dedication</div>
-                        <p style="font-size: 0.9rem; color: #666;">2025</p>
+                        <p style="font-size: 0.9rem; color: #666;">Dedication to proclaiming the Gospel (2025)</p>
                     </div>
                 </div>
             </div>
@@ -499,7 +415,6 @@
                     <div class="social-icons">
                         <a href="https://www.facebook.com/minhkhoifoto.27"><i class="fa-brands fa-facebook"></i></a>
                         <a href="https://www.instagram.com/minhkhoifoto.27/"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -515,25 +430,19 @@
 
     <script>
         function switchTab(tabId) {
-            // Ẩn tất cả section ngoại trừ Home nếu tabId không phải home
             document.querySelectorAll('.content-section').forEach(el => {
                 el.classList.remove('active');
                 if(tabId !== 'home') el.style.display = 'none';
             });
-            
-            // Xử lý Active Nav
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
             
-            // Hiện tab được chọn
             const target = document.getElementById(tabId);
             if (target) {
                 target.style.display = 'block';
-                // Trigger reflow
                 void target.offsetWidth; 
                 target.classList.add('active');
             }
 
-            // Highlight button
             const btns = document.querySelectorAll('.nav-btn');
             btns.forEach(btn => {
                 if(btn.getAttribute('onclick').includes(tabId)) {
@@ -541,7 +450,6 @@
                 }
             });
 
-            // Nếu không phải Home, cuộn xuống một chút qua Hero
             if (tabId !== 'home') {
                 const headerOffset = 80;
                 const elementPosition = target.getBoundingClientRect().top;
