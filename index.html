@@ -74,6 +74,7 @@
             font-weight: 700;
             letter-spacing: -0.5px;
             text-transform: uppercase;
+            cursor: pointer;
         }
         .logo span { font-weight: 300; opacity: 0.9; font-size: 1.4rem; text-transform: none; display: block; line-height: 0.8;}
 
@@ -87,6 +88,35 @@
         }
 
         .nav-btn:hover, .nav-btn.active { opacity: 1; border-color: var(--white); }
+
+        /* --- FLOATING ACTION BUTTON (LANGUAGE) --- */
+        .fab-lang {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--harvard-crimson);
+            color: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2000;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease, background-color 0.3s;
+        }
+
+        .fab-lang:hover {
+            transform: scale(1.1);
+            background-color: #8a1526;
+        }
 
         /* --- HERO SECTION (Featured Story Style) --- */
         .hero {
@@ -239,6 +269,7 @@
             .grid-3, .award-grid, .footer-grid { grid-template-columns: 1fr; }
             .header-inner { height: auto; padding: 15px 0; flex-direction: column; gap: 10px; }
             .nav-links { gap: 15px; font-size: 0.8rem; }
+            .fab-lang { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -246,9 +277,9 @@
 
     <div class="utility-bar">
         <div class="container utility-wrapper">
-            <a href="#" class="utility-link" onclick="toggleLanguage()">Language: <span id="lang-text">VN</span></a>
             <a href="mailto:luuminhkhoiworking@gmail.com" class="utility-link">Contact</a>
             <a href="#" class="utility-link">Alumni</a>
+            <a href="#" class="utility-link">Give</a>
         </div>
     </div>
 
@@ -266,6 +297,10 @@
             </nav>
         </div>
     </header>
+
+    <button class="fab-lang" onclick="toggleLanguage()" title="Switch Language">
+        <div id="lang-text-fab">EN</div>
+    </button>
 
     <section id="home" class="content-section active" style="padding: 0; display: block;">
         <div class="hero">
@@ -304,9 +339,29 @@
                 <div class="news-card">
                     <span class="news-cat">Biography</span>
                     <h3 class="news-title">Lưu Minh Khôi</h3>
-                    <div class="news-excerpt">
-                        Student @ Le Quy Don High School for the Gifted.<br>
-                        "Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans."
+                    
+                    <div class="news-excerpt content-vi" style="text-align: justify;">
+                        <p style="margin-bottom: 10px;">
+                            Lưu Minh Khôi là một học sinh tại trường <strong>THPT Chuyên Lê Quý Đôn (Nha Trang)</strong> với niềm đam mê sâu sắc dành cho công nghệ, nhiếp ảnh và thần học.
+                        </p>
+                        <p>
+                            Với tư duy cầu tiến và tinh thần phục vụ, Khôi luôn tìm cách kết hợp các kỹ năng kỹ thuật với các giá trị nhân văn để tạo ra những tác động tích cực cho cộng đồng.
+                        </p>
+                    </div>
+
+                    <div class="news-excerpt content-en" style="text-align: justify;">
+                        <p style="margin-bottom: 10px;">
+                            Luu Minh Khoi is a student at <strong>Le Quy Don High School for the Gifted (Nha Trang)</strong> with a deep passion for technology, photography, and theology.
+                        </p>
+                        <p>
+                            With a progressive mindset and a spirit of service, Khoi consistently seeks to combine technical skills with humanistic values to create positive impacts for the community.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
+                        <span style="font-family: 'Merriweather', serif; font-style: italic; font-size: 0.85rem; color: #666;">
+                            Class of 2026 Candidate
+                        </span>
                     </div>
                 </div>
 
@@ -492,15 +547,15 @@
 
         function toggleLanguage() {
             const body = document.body;
-            const label = document.getElementById('lang-text');
+            const fabText = document.getElementById('lang-text-fab');
             if (body.classList.contains('lang-vi')) {
                 body.classList.remove('lang-vi');
                 body.classList.add('lang-en');
-                label.innerText = "EN";
+                fabText.innerText = "VI";
             } else {
                 body.classList.remove('lang-en');
                 body.classList.add('lang-vi');
-                label.innerText = "VN";
+                fabText.innerText = "EN";
             }
         }
     </script>
