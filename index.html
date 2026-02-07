@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lưu Minh Khôi | Personal Portfolio</title>
+    
+    <meta property="og:title" content="Lưu Minh Khôi | Portfolio & Research">
+    <meta property="og:description" content="Hành trình giao thoa giữa Thần học, Nghệ thuật & Công nghệ của Lưu Minh Khôi.">
+    <meta property="og:image" content="Pio.png"> <meta property="og:url" content="https://minhkhoifotography.github.io"> <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
@@ -118,6 +123,7 @@
 
         /* --- CONTENT SECTIONS --- */
         .content-section { padding: 80px 0; background-color: var(--white); display: none; }
+        /* Khi active thì hiện block và chạy animation */
         .content-section.active { display: block; animation: fadeIn 0.5s ease-out; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -229,10 +235,19 @@
                             Life to me is a long journey in pursuit of Truth, Goodness, and Beauty. From the logic of computer science, I found emotion through the lens of photography and depth in theological thought. This is where I archive my growth, identity creation, and aspiration to serve society.
                         </span>
                     </p>
-                    <a href="#" onclick="switchTab('about')" class="btn-crimson">
-                        <span class="content-vi">Đọc thêm về tôi</span>
-                        <span class="content-en">Read Biography</span>
-                    </a>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                        <a href="#" onclick="switchTab('about')" class="btn-crimson">
+                            <span class="content-vi">Đọc thêm về tôi</span>
+                            <span class="content-en">Read Biography</span>
+                        </a>
+                        
+                        <a href="CV_LuuMinhKhoi.pdf" target="_blank" class="btn-crimson" style="background: transparent; border: 2px solid #fff;">
+                            <span class="content-vi"><i class="fa-solid fa-download"></i> Tải CV</span>
+                            <span class="content-en"><i class="fa-solid fa-download"></i> Download CV</span>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -432,7 +447,7 @@
                     <h4>Copyright</h4>
                     <p style="color: #999; font-size: 0.9rem;">
                         © 2026 Luu Minh Khoi.<br>
-                        Web designed by Luu Minh Khoi.
+                        Designed with Harvard Identity Guidelines in mind.
                     </p>
                 </div>
             </div>
