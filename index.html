@@ -7,16 +7,22 @@
     <meta name="author" content="Luu Minh Khoi">
     <title>Lưu Minh Khôi | Personal Portfolio</title>
     
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+
     <meta property="og:title" content="Lưu Minh Khôi | Portfolio & Research">
     <meta property="og:description" content="Hành trình giao thoa giữa Thần học, Nghệ thuật & Công nghệ của Lưu Minh Khôi.">
     <meta property="og:image" content="Pio.png">
     <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lưu Minh Khôi | Portfolio & Research">
+    <meta name="twitter:description" content="Hành trình giao thoa giữa Thần học, Nghệ thuật & Công nghệ.">
+    <meta name="twitter:image" content="Pio.png">
 
     <script type="application/ld+json">
     {
       "@context": "http://schema.org",
       "@type": "Person",
-      "name": "Luu Minh Khoi",
+      "name": "Lưu Minh Khôi",
       "jobTitle": "Researcher & Photographer",
       "url": "https://minhkhoifotography.github.io",
       "sameAs": [
@@ -44,7 +50,7 @@
             --font-sans: 'Inter', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* [EXPERT 2] Hide default cursor */ }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Hide default cursor */ }
 
         html { scroll-behavior: smooth; }
 
@@ -57,16 +63,14 @@
             overflow-x: hidden;
         }
 
-        /* [EXPERT 2] CUSTOM CURSOR STYLES */
+        /* CUSTOM CURSOR */
         .cursor-dot, .cursor-outline {
             position: fixed; top: 0; left: 0;
             transform: translate(-50%, -50%);
             border-radius: 50%; z-index: 10000;
             pointer-events: none;
         }
-        .cursor-dot {
-            width: 8px; height: 8px; background-color: var(--harvard-crimson);
-        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--harvard-crimson); }
         .cursor-outline {
             width: 40px; height: 40px;
             border: 1px solid var(--harvard-crimson);
@@ -79,7 +83,7 @@
             border-color: transparent;
         }
 
-        /* [EXPERT 3] PRELOADER */
+        /* PRELOADER */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--harvard-black); z-index: 99999;
@@ -98,9 +102,7 @@
             width: 100%; height: 4px; background: #ccc;
             position: fixed; top: 0; left: 0; z-index: 9999;
         }
-        .progress-bar {
-            height: 4px; background: var(--harvard-crimson); width: 0%;
-        }
+        .progress-bar { height: 4px; background: var(--harvard-crimson); width: 0%; }
 
         /* --- UTILS --- */
         body.lang-vi .content-en { display: none !important; }
@@ -129,10 +131,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .header-inner {
-            display: flex; justify-content: space-between; align-items: center;
-            height: 80px;
-        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; height: 80px; }
 
         .logo {
             font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700;
@@ -196,10 +195,7 @@
         .hero-desc { font-size: 1.1rem; color: #cccccc; margin-bottom: 40px; font-weight: 300; }
         
         /* Typewriter Cursor */
-        .typing-text::after, .typing-text-en::after {
-            content: '|';
-            animation: blink 0.7s infinite;
-        }
+        .typing-text::after, .typing-text-en::after { content: '|'; animation: blink 0.7s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         
         .btn-crimson {
@@ -248,9 +244,7 @@
         .academic-role { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; margin: 5px 0; line-height: 1.2;}
         .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); margin-bottom: 10px; display: block; }
         
-        .academic-details {
-            list-style-type: disc; padding-left: 20px; margin-top: 10px; color: var(--text-light); font-size: 0.95rem;
-        }
+        .academic-details { list-style-type: disc; padding-left: 20px; margin-top: 10px; color: var(--text-light); font-size: 0.95rem; }
         .academic-details li { margin-bottom: 5px; }
 
         /* Awards */
@@ -404,7 +398,7 @@
                 <div class="news-card" data-aos="fade-up" data-aos-delay="100">
                     <span class="news-cat">Biography</span>
                     
-                    <img src="Pio_01.png" alt="Lưu Minh Khôi" style="width: 100%; border-radius: 4px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); object-fit: cover;">
+                    <img src="Pio_01.png" alt="Lưu Minh Khôi" loading="lazy" style="width: 100%; border-radius: 4px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); object-fit: cover;">
                     
                     <h3 class="news-title">Lưu Minh Khôi</h3>
                     <div class="news-excerpt">
