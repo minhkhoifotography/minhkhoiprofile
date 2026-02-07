@@ -7,10 +7,12 @@
     
     <meta property="og:title" content="Lưu Minh Khôi | Portfolio & Research">
     <meta property="og:description" content="Hành trình giao thoa giữa Thần học, Nghệ thuật & Công nghệ của Lưu Minh Khôi.">
-    <meta property="og:image" content="Pio.png"> <meta property="og:url" content="https://minhkhoifotography.github.io"> <meta property="og:type" content="website">
+    <meta property="og:image" content="Pio.png">
+    <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         /* --- HARVARD DESIGN TOKENS --- */
@@ -26,6 +28,8 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--white);
@@ -82,19 +86,26 @@
         }
         .nav-btn:hover, .nav-btn.active { opacity: 1; border-color: var(--white); }
 
-        /* --- FLOATING ACTION BUTTON --- */
-        .fab-lang {
+        /* --- ACTION BUTTONS (LANG & BACK TO TOP) --- */
+        .fab-container {
             position: fixed; bottom: 30px; right: 30px;
-            width: 60px; height: 60px;
+            display: flex; flex-direction: column; gap: 15px; z-index: 2000;
+        }
+
+        .fab-btn {
+            width: 50px; height: 50px;
             background-color: var(--harvard-crimson); color: var(--white);
             border-radius: 50%; border: 2px solid var(--white);
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            cursor: pointer; z-index: 2000;
-            font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem;
-            transition: transform 0.3s ease;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem;
+            transition: transform 0.3s ease, opacity 0.3s;
         }
-        .fab-lang:hover { transform: scale(1.1); background-color: #8a1526; }
+        .fab-btn:hover { transform: scale(1.1); background-color: #8a1526; }
+        
+        /* [PHẦN 6] Back to Top hidden by default */
+        #backToTop { opacity: 0; visibility: hidden; }
+        #backToTop.show { opacity: 1; visibility: visible; }
 
         /* --- HERO SECTION --- */
         .hero { background-color: var(--harvard-black); color: var(--white); position: relative; overflow: hidden; }
@@ -102,6 +113,9 @@
         .hero-image {
             background-image: url('Pio_02.png'); background-size: cover; background-position: center; position: relative;
         }
+        /* Fallback ảnh nếu Pio_02.png lỗi */
+        .hero-image { background-color: #333; } 
+        
         .hero-image::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.2); }
         .hero-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; background: var(--harvard-black); }
         
@@ -117,16 +131,14 @@
         .btn-crimson {
             display: inline-block; background-color: var(--harvard-crimson); color: var(--white);
             padding: 15px 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            font-size: 0.9rem; width: fit-content; transition: 0.3s;
+            font-size: 0.9rem; width: fit-content; transition: 0.3s; margin-right: 10px; margin-bottom: 10px;
         }
         .btn-crimson:hover { background-color: #8a1526; }
 
         /* --- CONTENT SECTIONS --- */
         .content-section { padding: 80px 0; background-color: var(--white); display: none; }
-        /* Khi active thì hiện block và chạy animation */
-        .content-section.active { display: block; animation: fadeIn 0.5s ease-out; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Không dùng animation CSS thuần nữa mà dùng AOS */
+        .content-section.active { display: block; } 
 
         .section-header { margin-bottom: 50px; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
         .section-header h2 { font-family: var(--font-serif); font-size: 2.2rem; color: var(--harvard-crimson); }
@@ -151,7 +163,7 @@
             background: #eee; padding: 4px 10px; font-size: 0.8rem; border-radius: 4px; font-weight: 600; color: #333;
         }
 
-        /* Timeline */
+        /* --- [PHẦN 5] TIMELINE DETAILS --- */
         .academic-list { border-left: 2px solid var(--harvard-crimson); padding-left: 30px; }
         .academic-item { margin-bottom: 40px; position: relative; }
         .academic-item::before {
@@ -161,7 +173,11 @@
         }
         .academic-year { font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .academic-role { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; margin: 5px 0; line-height: 1.2;}
-        .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); margin-bottom: 5px; }
+        .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); margin-bottom: 10px; display: block; }
+        
+        /* Bullet points for details */
+        .academic-details { list-style-type: disc; padding-left: 20px; color: var(--text-light); font-size: 0.95rem; margin-top: 5px; }
+        .academic-details li { margin-bottom: 5px; }
 
         /* Awards */
         .award-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -171,20 +187,42 @@
         .award-box:hover { background: #e5e5e5; }
         .award-icon { font-size: 2rem; color: var(--harvard-crimson); }
 
+        /* --- [PHẦN 2] PORTFOLIO GRID --- */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .portfolio-card {
+            background: #fff; border: 1px solid #eee; overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .portfolio-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .portfolio-img {
+            height: 200px; background-color: #ddd; background-size: cover; background-position: center;
+            position: relative;
+        }
+        .portfolio-tag {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--harvard-crimson); color: white;
+            padding: 5px 10px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase;
+        }
+        .portfolio-content { padding: 25px; }
+        .portfolio-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+        .portfolio-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+        .portfolio-link { color: var(--harvard-crimson); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
+
         /* Footer */
         footer { background-color: var(--harvard-black); color: var(--white); padding: 60px 0; margin-top: auto; }
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
         .footer-col h4 { color: #999; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; font-weight: 700; }
         .footer-links a { display: block; color: var(--white); margin-bottom: 10px; font-weight: 600; }
-        .social-icons a { font-size: 1.5rem; margin-right: 20px; color: var(--white); }
+        .social-icons a { font-size: 1.5rem; margin-right: 20px; color: var(--white); transition: 0.3s; }
         .social-icons a:hover { color: var(--harvard-crimson); }
 
         @media (max-width: 768px) {
             .hero-grid { grid-template-columns: 1fr; }
             .hero-image { height: 300px; }
-            .grid-3, .award-grid, .footer-grid { grid-template-columns: 1fr; }
+            .grid-3, .award-grid, .footer-grid, .portfolio-grid { grid-template-columns: 1fr; }
             .header-inner { height: auto; padding: 15px 0; flex-direction: column; gap: 10px; }
             .nav-links { gap: 15px; font-size: 0.8rem; }
+            .fab-container { bottom: 20px; right: 20px; }
         }
     </style>
 </head>
@@ -208,20 +246,26 @@
                 <button class="nav-btn active" onclick="switchTab('home')">In Focus</button>
                 <button class="nav-btn" onclick="switchTab('about')">About</button>
                 <button class="nav-btn" onclick="switchTab('academics')">Academics</button>
+                <button class="nav-btn" onclick="switchTab('portfolio')">Portfolio</button>
                 <button class="nav-btn" onclick="switchTab('honors')">Honors</button>
             </nav>
         </div>
     </header>
 
-    <button class="fab-lang" onclick="toggleLanguage()" title="Switch Language">
-        <div id="lang-text-fab">EN</div>
-    </button>
+    <div class="fab-container">
+        <button class="fab-btn" id="backToTop" onclick="scrollToTop()" title="Back to Top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+        <button class="fab-btn" onclick="toggleLanguage()" title="Switch Language">
+            <div id="lang-text-fab">EN</div>
+        </button>
+    </div>
 
     <section id="home" class="content-section active" style="display: block; padding: 0;">
         <div class="hero">
             <div class="hero-grid">
                 <div class="hero-image"></div>
-                <div class="hero-content">
+                <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                     <div class="section-label">In Focus</div>
                     <h1 class="hero-title">
                         <span class="content-vi">Đôi nét về Minh Khôi</span>
@@ -241,13 +285,11 @@
                             <span class="content-vi">Đọc thêm về tôi</span>
                             <span class="content-en">Read Biography</span>
                         </a>
-                        
                         <a href="CV_LuuMinhKhoi.pdf" target="_blank" class="btn-crimson" style="background: transparent; border: 2px solid #fff;">
                             <span class="content-vi"><i class="fa-solid fa-download"></i> Tải CV</span>
                             <span class="content-en"><i class="fa-solid fa-download"></i> Download CV</span>
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -255,7 +297,7 @@
 
     <section id="about" class="content-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-right">
                 <h2>
                     <span class="content-vi">Thông tin cá nhân</span>
                     <span class="content-en">Personal Profile</span>
@@ -263,11 +305,9 @@
             </div>
 
             <div class="grid-3">
-                <div class="news-card">
+                <div class="news-card" data-aos="fade-up" data-aos-delay="100">
                     <span class="news-cat">Biography</span>
-                    
                     <img src="Pio_01.png" alt="Lưu Minh Khôi" style="width: 100%; border-radius: 4px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); object-fit: cover;">
-                    
                     <h3 class="news-title">Lưu Minh Khôi</h3>
                     <div class="news-excerpt">
                         <p style="margin-bottom:10px;">@minhkhoifoto.27</p>
@@ -275,16 +315,16 @@
                         <em style="color: #666;">"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans." (-Jeremias 31:3-)</em>
                         </p>
                     </div>
-                    <div style="margin-top: 20px;">
-                         <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                         <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                         <a href="https://locket.cam/minhkhoifoto" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Locket"><i class="fa-solid fa-heart"></i></a>
-                         <a href="https://wa.me/qr/EHDNZFH6A7FWG1" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                         <a href="https://www.linkedin.com/in/minh-kh%C3%B4i-l%C6%B0u-0613133ab/" target="_blank" style="font-size: 1.2rem;" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 15px;">
+                         <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-facebook"></i></a>
+                         <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-instagram"></i></a>
+                         <a href="https://locket.cam/minhkhoifoto" target="_blank" style="font-size: 1.2rem;"><i class="fa-solid fa-heart"></i></a>
+                         <a href="https://wa.me/qr/EHDNZFH6A7FWG1" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-whatsapp"></i></a>
+                         <a href="https://www.linkedin.com/in/minh-kh%C3%B4i-l%C6%B0u-0613133ab/" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-linkedin"></i></a>
                     </div>
                 </div>
 
-                <div class="news-card">
+                <div class="news-card" data-aos="fade-up" data-aos-delay="200">
                     <span class="news-cat">Details</span>
                     <ul class="news-list" style="list-style: none;">
                         <li><span>BOD</span> <strong>16/11/2008</strong></li>
@@ -296,7 +336,7 @@
                     </ul>
                 </div>
 
-                <div class="news-card">
+                <div class="news-card" data-aos="fade-up" data-aos-delay="300">
                     <span class="news-cat">Interests & Hobbies</span>
                     <div class="hobby-tags">
                         <span class="tag">📷 Photography</span>
@@ -314,7 +354,7 @@
 
     <section id="academics" class="content-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-right">
                 <h2>
                     <span class="content-vi">Hành trình & Kinh nghiệm</span>
                     <span class="content-en">Journey & Experience</span>
@@ -322,52 +362,121 @@
             </div>
 
             <div class="academic-list">
-                <div class="academic-item">
+                <div class="academic-item" data-aos="fade-left">
                     <div class="academic-year">2025 - Present</div>
                     <div class="academic-role">Foreign Affairs Officer</div>
-                    <div class="academic-place">Conferentia Episcoporum Vietnamie</div>
+                    <span class="academic-place">Conferentia Episcoporum Vietnamie</span>
+                    <ul class="academic-details">
+                        <li>
+                            <span class="content-vi">Phụ trách công tác đối ngoại, xây dựng quan hệ với các tổ chức tôn giáo quốc tế.</span>
+                            <span class="content-en">Responsible for external affairs, building relations with international religious organizations.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Điều phối và hỗ trợ tổ chức các sự kiện ngoại giao quan trọng.</span>
+                            <span class="content-en">Coordinate and support the organization of key diplomatic events.</span>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="academic-item">
+                <div class="academic-item" data-aos="fade-left" data-aos-delay="100">
                     <div class="academic-year">2025 - Present</div>
                     <div class="academic-role">Professor of Theology</div>
-                    <div class="academic-place">Nha Trang Cathedral</div>
+                    <span class="academic-place">Nha Trang Cathedral</span>
+                    <ul class="academic-details">
+                        <li>
+                            <span class="content-vi">Giảng dạy các chuyên đề về Thần học và Giáo lý Công giáo.</span>
+                            <span class="content-en">Lecturing on Theology and Catholic Catechism topics.</span>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="academic-item">
+                <div class="academic-item" data-aos="fade-left" data-aos-delay="200">
                     <div class="academic-year">2025</div>
-                    <div class="academic-role">Mentor</div>
-                    <div class="academic-place">Le Quy Don Science and Engineering Fair</div>
+                    <div class="academic-role">Mentor & Researcher</div>
+                    <span class="academic-place">Le Quy Don Science and Engineering Fair</span>
+                    <ul class="academic-details">
+                        <li>
+                            <span class="content-vi">Hướng dẫn đề tài nghiên cứu khoa học kỹ thuật cho học sinh.</span>
+                            <span class="content-en">Mentoring students on science and engineering research projects.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Tham gia nghiên cứu và phát triển giải pháp thực tiễn.</span>
+                            <span class="content-en">Participating in research and developing practical solutions.</span>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="academic-item">
-                    <div class="academic-year">2024 - 2025</div>
-                    <div class="academic-role">Vice Professor of Theology</div>
-                    <div class="academic-place">Phuoc Hoa Parish</div>
-                </div>
-
-                <div class="academic-item">
+                <div class="academic-item" data-aos="fade-left">
                     <div class="academic-year">2023 - 2025</div>
                     <div class="academic-role">Photographer of LMC</div>
-                    <div class="academic-place">Le Quy Don Media Club</div>
+                    <span class="academic-place">Le Quy Don Media Club</span>
+                    <ul class="academic-details">
+                        <li>
+                            <span class="content-vi">Ghi lại những khoảnh khắc đáng nhớ trong các sự kiện lớn của trường.</span>
+                            <span class="content-en">Capturing memorable moments in major school events.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Quản lý và chỉnh sửa hình ảnh truyền thông.</span>
+                            <span class="content-en">Managing and editing media images.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="content-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-right">
+                <h2>
+                    <span class="content-vi">Dự án & Tác phẩm</span>
+                    <span class="content-en">Projects & Portfolio</span>
+                </h2>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-card" data-aos="zoom-in">
+                    <div class="portfolio-img" style="background-image: url('Pio_02.png');">
+                        <span class="portfolio-tag">Photography</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">School Life Collection</h3>
+                        <p class="portfolio-desc">
+                            <span class="content-vi">Bộ sưu tập ảnh ghi lại những khoảnh khắc thanh xuân rực rỡ tại mái trường Lê Quý Đôn.</span>
+                            <span class="content-en">A photo collection capturing brilliant youth moments at Le Quy Don High School.</span>
+                        </p>
+                        <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" class="portfolio-link">View Gallery &rarr;</a>
+                    </div>
                 </div>
 
-                <div class="academic-item">
-                    <div class="academic-year">2024</div>
-                    <div class="academic-role">Head of Collaborator (Tech & Control)</div>
-                    <div class="academic-place">MSOCE Management</div>
+                <div class="portfolio-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="portfolio-img" style="background: #eee; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-book-open" style="font-size: 3rem; color: #ccc;"></i>
+                        <span class="portfolio-tag">Research</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Theology Research Paper</h3>
+                        <p class="portfolio-desc">
+                            <span class="content-vi">Nghiên cứu về sự giao thoa giữa Đức tin và Lý trí trong bối cảnh hiện đại.</span>
+                            <span class="content-en">Research on the intersection of Faith and Reason in the modern context.</span>
+                        </p>
+                        <a href="#" class="portfolio-link">Read Paper &rarr;</a>
+                    </div>
                 </div>
 
-                 <div class="academic-item">
-                    <div class="academic-year">2023 - 2024</div>
-                    <div class="academic-role">Member of Logistics Department</div>
-                    <div class="academic-place">We Know We Share 2024</div>
-                </div>
-
-                <div class="academic-item">
-                    <div class="academic-year">2017 - 2022</div>
-                    <div class="academic-role">Professor of Vocal Music</div>
-                    <div class="academic-place">Stella Maris Major Seminary</div>
+                <div class="portfolio-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="portfolio-img" style="background: #2d2d2d; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-code" style="font-size: 3rem; color: #fff;"></i>
+                        <span class="portfolio-tag">Development</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">MinhKhoi's Portfolio</h3>
+                        <p class="portfolio-desc">
+                            <span class="content-vi">Website cá nhân được thiết kế theo phong cách Harvard Academic.</span>
+                            <span class="content-en">Personal website designed in Harvard Academic style.</span>
+                        </p>
+                        <a href="#" class="portfolio-link">View Source &rarr;</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -375,7 +484,7 @@
 
     <section id="honors" class="content-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-right">
                 <h2>
                     <span class="content-vi">Giải thưởng & Ghi nhận</span>
                     <span class="content-en">Honors & Awards</span>
@@ -383,7 +492,7 @@
             </div>
 
             <div class="award-grid">
-                <div class="award-box">
+                <div class="award-box" data-aos="flip-up">
                     <i class="fa-solid fa-trophy award-icon"></i>
                     <div>
                         <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">1st Prize</h3>
@@ -392,7 +501,7 @@
                     </div>
                 </div>
 
-                <div class="award-box">
+                <div class="award-box" data-aos="flip-up" data-aos-delay="100">
                     <i class="fa-solid fa-medal award-icon"></i>
                     <div>
                         <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">2nd Prize</h3>
@@ -401,7 +510,7 @@
                     </div>
                 </div>
 
-                <div class="award-box">
+                <div class="award-box" data-aos="flip-up" data-aos-delay="200">
                     <i class="fa-solid fa-certificate award-icon"></i>
                     <div>
                         <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">3rd Prize</h3>
@@ -410,7 +519,7 @@
                     </div>
                 </div>
 
-                <div class="award-box">
+                <div class="award-box" data-aos="flip-up" data-aos-delay="300">
                     <i class="fa-solid fa-scroll award-icon"></i>
                     <div>
                         <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 5px;">Papal Leo XIV's Blessing</h3>
@@ -454,27 +563,39 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
+        // Init AOS
+        AOS.init({
+            once: false, // Animation lặp lại mỗi khi cuộn
+            mirror: true,
+            duration: 800,
+            offset: 50
+        });
+
         function switchTab(tabId) {
-            // 1. Ẩn tất cả section nội dung
+            // 1. Ẩn tất cả section
             document.querySelectorAll('.content-section').forEach(el => {
                 el.classList.remove('active');
                 el.style.display = 'none'; 
             });
             
-            // 2. Xóa trạng thái active của nút
+            // 2. Xóa active nav
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
             
-            // 3. Hiển thị Section được chọn
+            // 3. Hiện section mới
             const target = document.getElementById(tabId);
             if (target) {
                 target.style.display = 'block'; 
+                // Refresh AOS để animation chạy lại khi chuyển tab
                 setTimeout(() => {
                     target.classList.add('active');
+                    AOS.refresh(); 
                 }, 10);
             }
 
-            // 4. Highlight nút được chọn
+            // 4. Highlight nav
             const btns = document.querySelectorAll('.nav-btn');
             btns.forEach(btn => {
                 if(btn.getAttribute('onclick').includes("'" + tabId + "'")) {
@@ -482,9 +603,23 @@
                 }
             });
 
-            // 5. Luôn cuộn lên đầu trang
+            // 5. Scroll top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // [PHẦN 6] Back to Top Logic
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+        });
 
         function toggleLanguage() {
             const body = document.body;
