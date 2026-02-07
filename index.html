@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
@@ -37,6 +38,7 @@
             font-family: var(--font-sans);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden; /* Tránh thanh cuộn ngang do animation */
         }
 
         /* --- UTILS --- */
@@ -86,7 +88,7 @@
         }
         .nav-btn:hover, .nav-btn.active { opacity: 1; border-color: var(--white); }
 
-        /* --- ACTION BUTTONS (LANG & BACK TO TOP) --- */
+        /* --- [TÍNH NĂNG 6] & LANG BUTTON --- */
         .fab-container {
             position: fixed; bottom: 30px; right: 30px;
             display: flex; flex-direction: column; gap: 15px; z-index: 2000;
@@ -99,11 +101,11 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             display: flex; justify-content: center; align-items: center;
             cursor: pointer; font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem;
-            transition: transform 0.3s ease, opacity 0.3s;
+            transition: transform 0.3s ease, opacity 0.3s, visibility 0.3s;
         }
         .fab-btn:hover { transform: scale(1.1); background-color: #8a1526; }
         
-        /* [PHẦN 6] Back to Top hidden by default */
+        /* Ẩn nút Back To Top mặc định */
         #backToTop { opacity: 0; visibility: hidden; }
         #backToTop.show { opacity: 1; visibility: visible; }
 
@@ -113,9 +115,6 @@
         .hero-image {
             background-image: url('Pio_02.png'); background-size: cover; background-position: center; position: relative;
         }
-        /* Fallback ảnh nếu Pio_02.png lỗi */
-        .hero-image { background-color: #333; } 
-        
         .hero-image::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.2); }
         .hero-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; background: var(--harvard-black); }
         
@@ -137,7 +136,7 @@
 
         /* --- CONTENT SECTIONS --- */
         .content-section { padding: 80px 0; background-color: var(--white); display: none; }
-        /* Không dùng animation CSS thuần nữa mà dùng AOS */
+        /* AOS sẽ lo phần animation, chỉ cần display block khi active */
         .content-section.active { display: block; } 
 
         .section-header { margin-bottom: 50px; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
@@ -163,7 +162,7 @@
             background: #eee; padding: 4px 10px; font-size: 0.8rem; border-radius: 4px; font-weight: 600; color: #333;
         }
 
-        /* --- [PHẦN 5] TIMELINE DETAILS --- */
+        /* Timeline */
         .academic-list { border-left: 2px solid var(--harvard-crimson); padding-left: 30px; }
         .academic-item { margin-bottom: 40px; position: relative; }
         .academic-item::before {
@@ -173,10 +172,12 @@
         }
         .academic-year { font-weight: 700; color: var(--harvard-crimson); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .academic-role { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; margin: 5px 0; line-height: 1.2;}
-        .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); margin-bottom: 10px; display: block; }
+        .academic-place { font-style: italic; color: #666; font-family: var(--font-serif); margin-bottom: 5px; display: block; }
         
-        /* Bullet points for details */
-        .academic-details { list-style-type: disc; padding-left: 20px; color: var(--text-light); font-size: 0.95rem; margin-top: 5px; }
+        /* [TÍNH NĂNG 5] STYLING CHO CHI TIẾT CÔNG VIỆC */
+        .academic-details {
+            list-style-type: disc; padding-left: 20px; margin-top: 10px; color: var(--text-light); font-size: 0.95rem;
+        }
         .academic-details li { margin-bottom: 5px; }
 
         /* Awards */
@@ -187,7 +188,7 @@
         .award-box:hover { background: #e5e5e5; }
         .award-icon { font-size: 2rem; color: var(--harvard-crimson); }
 
-        /* --- [PHẦN 2] PORTFOLIO GRID --- */
+        /* [TÍNH NĂNG 2] PORTFOLIO GRID */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .portfolio-card {
             background: #fff; border: 1px solid #eee; overflow: hidden;
@@ -195,8 +196,7 @@
         }
         .portfolio-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .portfolio-img {
-            height: 200px; background-color: #ddd; background-size: cover; background-position: center;
-            position: relative;
+            height: 200px; background-color: #ddd; background-size: cover; background-position: center; position: relative;
         }
         .portfolio-tag {
             position: absolute; top: 15px; right: 15px;
@@ -213,7 +213,7 @@
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
         .footer-col h4 { color: #999; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; font-weight: 700; }
         .footer-links a { display: block; color: var(--white); margin-bottom: 10px; font-weight: 600; }
-        .social-icons a { font-size: 1.5rem; margin-right: 20px; color: var(--white); transition: 0.3s; }
+        .social-icons a { font-size: 1.5rem; margin-right: 20px; color: var(--white); transition: 0.3s;}
         .social-icons a:hover { color: var(--harvard-crimson); }
 
         @media (max-width: 768px) {
@@ -285,6 +285,7 @@
                             <span class="content-vi">Đọc thêm về tôi</span>
                             <span class="content-en">Read Biography</span>
                         </a>
+                        
                         <a href="CV_LuuMinhKhoi.pdf" target="_blank" class="btn-crimson" style="background: transparent; border: 2px solid #fff;">
                             <span class="content-vi"><i class="fa-solid fa-download"></i> Tải CV</span>
                             <span class="content-en"><i class="fa-solid fa-download"></i> Download CV</span>
@@ -307,7 +308,9 @@
             <div class="grid-3">
                 <div class="news-card" data-aos="fade-up" data-aos-delay="100">
                     <span class="news-cat">Biography</span>
+                    
                     <img src="Pio_01.png" alt="Lưu Minh Khôi" style="width: 100%; border-radius: 4px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); object-fit: cover;">
+                    
                     <h3 class="news-title">Lưu Minh Khôi</h3>
                     <div class="news-excerpt">
                         <p style="margin-bottom:10px;">@minhkhoifoto.27</p>
@@ -315,12 +318,12 @@
                         <em style="color: #666;">"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans." (-Jeremias 31:3-)</em>
                         </p>
                     </div>
-                    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 15px;">
-                         <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-facebook"></i></a>
-                         <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-instagram"></i></a>
-                         <a href="https://locket.cam/minhkhoifoto" target="_blank" style="font-size: 1.2rem;"><i class="fa-solid fa-heart"></i></a>
-                         <a href="https://wa.me/qr/EHDNZFH6A7FWG1" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-whatsapp"></i></a>
-                         <a href="https://www.linkedin.com/in/minh-kh%C3%B4i-l%C6%B0u-0613133ab/" target="_blank" style="font-size: 1.2rem;"><i class="fa-brands fa-linkedin"></i></a>
+                    <div style="margin-top: 20px;">
+                         <a href="https://www.facebook.com/minhkhoifoto.27" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                         <a href="https://www.instagram.com/minhkhoifoto.27/" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                         <a href="https://locket.cam/minhkhoifoto" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="Locket"><i class="fa-solid fa-heart"></i></a>
+                         <a href="https://wa.me/qr/EHDNZFH6A7FWG1" target="_blank" style="margin-right: 15px; font-size: 1.2rem;" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                         <a href="https://www.linkedin.com/in/minh-kh%C3%B4i-l%C6%B0u-0613133ab/" target="_blank" style="font-size: 1.2rem;" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                     </div>
                 </div>
 
@@ -368,12 +371,12 @@
                     <span class="academic-place">Conferentia Episcoporum Vietnamie</span>
                     <ul class="academic-details">
                         <li>
-                            <span class="content-vi">Phụ trách công tác đối ngoại, xây dựng quan hệ với các tổ chức tôn giáo quốc tế.</span>
-                            <span class="content-en">Responsible for external affairs, building relations with international religious organizations.</span>
+                            <span class="content-vi">Phụ trách công tác đối ngoại và ngoại giao.</span>
+                            <span class="content-en">Responsible for external affairs and diplomatic relations.</span>
                         </li>
                         <li>
-                            <span class="content-vi">Điều phối và hỗ trợ tổ chức các sự kiện ngoại giao quan trọng.</span>
-                            <span class="content-en">Coordinate and support the organization of key diplomatic events.</span>
+                            <span class="content-vi">Xây dựng cầu nối với các tổ chức quốc tế.</span>
+                            <span class="content-en">Building bridges with international organizations.</span>
                         </li>
                     </ul>
                 </div>
@@ -384,26 +387,28 @@
                     <span class="academic-place">Nha Trang Cathedral</span>
                     <ul class="academic-details">
                         <li>
-                            <span class="content-vi">Giảng dạy các chuyên đề về Thần học và Giáo lý Công giáo.</span>
-                            <span class="content-en">Lecturing on Theology and Catholic Catechism topics.</span>
+                            <span class="content-vi">Giảng dạy và nghiên cứu về thần học.</span>
+                            <span class="content-en">Teaching and researching theology.</span>
                         </li>
                     </ul>
                 </div>
 
                 <div class="academic-item" data-aos="fade-left" data-aos-delay="200">
                     <div class="academic-year">2025</div>
-                    <div class="academic-role">Mentor & Researcher</div>
+                    <div class="academic-role">Mentor</div>
                     <span class="academic-place">Le Quy Don Science and Engineering Fair</span>
                     <ul class="academic-details">
                         <li>
-                            <span class="content-vi">Hướng dẫn đề tài nghiên cứu khoa học kỹ thuật cho học sinh.</span>
-                            <span class="content-en">Mentoring students on science and engineering research projects.</span>
-                        </li>
-                        <li>
-                            <span class="content-vi">Tham gia nghiên cứu và phát triển giải pháp thực tiễn.</span>
-                            <span class="content-en">Participating in research and developing practical solutions.</span>
+                            <span class="content-vi">Hướng dẫn các dự án nghiên cứu khoa học kỹ thuật.</span>
+                            <span class="content-en">Mentoring science and engineering research projects.</span>
                         </li>
                     </ul>
+                </div>
+
+                <div class="academic-item" data-aos="fade-left">
+                    <div class="academic-year">2024 - 2025</div>
+                    <div class="academic-role">Vice Professor of Theology</div>
+                    <span class="academic-place">Phuoc Hoa Parish</span>
                 </div>
 
                 <div class="academic-item" data-aos="fade-left">
@@ -412,14 +417,28 @@
                     <span class="academic-place">Le Quy Don Media Club</span>
                     <ul class="academic-details">
                         <li>
-                            <span class="content-vi">Ghi lại những khoảnh khắc đáng nhớ trong các sự kiện lớn của trường.</span>
-                            <span class="content-en">Capturing memorable moments in major school events.</span>
-                        </li>
-                        <li>
-                            <span class="content-vi">Quản lý và chỉnh sửa hình ảnh truyền thông.</span>
-                            <span class="content-en">Managing and editing media images.</span>
+                            <span class="content-vi">Ghi lại hình ảnh các sự kiện quan trọng của trường.</span>
+                            <span class="content-en">Capturing images of important school events.</span>
                         </li>
                     </ul>
+                </div>
+
+                <div class="academic-item" data-aos="fade-left">
+                    <div class="academic-year">2024</div>
+                    <div class="academic-role">Head of Collaborator (Tech & Control)</div>
+                    <span class="academic-place">MSOCE Management</span>
+                </div>
+
+                 <div class="academic-item" data-aos="fade-left">
+                    <div class="academic-year">2023 - 2024</div>
+                    <div class="academic-role">Member of Logistics Department</div>
+                    <span class="academic-place">We Know We Share 2024</span>
+                </div>
+
+                <div class="academic-item" data-aos="fade-left">
+                    <div class="academic-year">2017 - 2022</div>
+                    <div class="academic-role">Professor of Vocal Music</div>
+                    <span class="academic-place">Stella Maris Major Seminary</span>
                 </div>
             </div>
         </div>
@@ -568,7 +587,7 @@
     <script>
         // Init AOS
         AOS.init({
-            once: false, // Animation lặp lại mỗi khi cuộn
+            once: false,
             mirror: true,
             duration: 800,
             offset: 50
@@ -588,7 +607,7 @@
             const target = document.getElementById(tabId);
             if (target) {
                 target.style.display = 'block'; 
-                // Refresh AOS để animation chạy lại khi chuyển tab
+                // Refresh AOS để animation chạy lại
                 setTimeout(() => {
                     target.classList.add('active');
                     AOS.refresh(); 
@@ -607,7 +626,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // [PHẦN 6] Back to Top Logic
+        // [TÍNH NĂNG 6] Back to Top Logic
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
