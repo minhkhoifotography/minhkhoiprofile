@@ -116,21 +116,19 @@
         #backToTop { opacity: 0; visibility: hidden; }
         #backToTop.show { opacity: 1; visibility: visible; }
 
-        /* --- HERO SECTION (ĐÃ SỬA LỖI ZOOM ẢNH) --- */
+        /* --- HERO SECTION --- */
         .hero { background-color: var(--harvard-black); color: var(--white); position: relative; overflow: hidden; }
         .hero-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 550px; }
         
         .hero-image {
             background-image: url('Pio_02.png'); 
-            /* SỬA ĐỔI QUAN TRỌNG TẠI ĐÂY: */
-            background-size: contain; /* Đảm bảo ảnh nằm gọn trong khung, không bị cắt */
-            background-repeat: no-repeat; /* Không lặp lại ảnh */
-            background-position: center; /* Căn giữa */
+            background-size: contain; 
+            background-repeat: no-repeat; 
+            background-position: center; 
             position: relative;
-            background-color: var(--harvard-black); /* Màu nền đen lấp đầy khoảng trống nếu ảnh không vừa khít */
+            background-color: var(--harvard-black); 
         }
         
-        /* Hiệu ứng bóng mờ nhẹ để ảnh hòa vào nền đen */
         .hero-image::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.1); }
         
         .hero-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; background: var(--harvard-black); }
@@ -210,7 +208,7 @@
         .award-box:hover { background: #e5e5e5; }
         .award-icon { font-size: 2rem; color: var(--harvard-crimson); }
 
-        /* Portfolio Grid (Đã tắt hiệu ứng Zoom khi hover để không bị rối) */
+        /* Portfolio Grid */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .portfolio-card {
             background: #fff; border: 1px solid #eee; overflow: hidden;
@@ -220,7 +218,7 @@
         
         .portfolio-img {
             height: 200px; background-color: #ddd; background-size: cover; background-position: center; position: relative;
-            /* Đã tắt hiệu ứng scale tại đây */
+            /* Đã tắt hiệu ứng scale để ảnh hiển thị chuẩn */
         }
 
         .portfolio-tag {
@@ -243,7 +241,7 @@
 
         @media (max-width: 768px) {
             .hero-grid { grid-template-columns: 1fr; }
-            .hero-image { height: 300px; background-size: cover; /* Trên mobile để cover cho đẹp hơn */ }
+            .hero-image { height: 300px; background-size: cover; }
             .grid-3, .award-grid, .footer-grid, .portfolio-grid { grid-template-columns: 1fr; }
             .header-inner { height: auto; padding: 15px 0; flex-direction: column; gap: 10px; }
             .nav-links { gap: 15px; font-size: 0.8rem; }
@@ -294,7 +292,6 @@
         <div class="hero">
             <div class="hero-grid">
                 <div class="hero-image"></div>
-                
                 <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                     <div class="section-label">In Focus</div>
                     <h1 class="hero-title">
@@ -480,8 +477,8 @@
                     <span class="academic-place">We Know We Share 2024</span>
                     <ul class="academic-details">
                         <li>
-                            <span class="content-vi">Tham gia lập kế hoạch và điều phối hậu cần cho sự kiện tư vấn ngành nghề.</span>
-                            <span class="content-en">Participating in planning and coordinating logistics for career event.</span>
+                            <span class="content-vi">Tham gia lập kế hoạch và điều phối hậu cần cho sự kiện gây quỹ từ thiện.</span>
+                            <span class="content-en">Participating in planning and coordinating logistics for charity fundraising events.</span>
                         </li>
                     </ul>
                 </div>
@@ -526,8 +523,7 @@
                 </div>
 
                 <div class="portfolio-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="portfolio-img" style="background: #eee; display: flex; align-items: center; justify-content: center;">
-                        <i class="fa-solid fa-book-open" style="font-size: 3rem; color: #ccc;"></i>
+                    <div class="portfolio-img" style="background-image: url('02.jpg'); background-size: cover; background-position: center;">
                         <span class="portfolio-tag">Research</span>
                     </div>
                     <div class="portfolio-content">
@@ -541,8 +537,7 @@
                 </div>
 
                 <div class="portfolio-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="portfolio-img" style="background: #2d2d2d; display: flex; align-items: center; justify-content: center;">
-                        <i class="fa-solid fa-code" style="font-size: 3rem; color: #fff;"></i>
+                    <div class="portfolio-img" style="background-image: url('01.jpg'); background-size: cover; background-position: center;">
                         <span class="portfolio-tag">Development</span>
                     </div>
                     <div class="portfolio-content">
